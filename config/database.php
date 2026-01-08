@@ -14,9 +14,15 @@ return [
     | the connection which will be utilized unless another connection
     | is explicitly specified when you execute a query / statement.
     |
+    | Multi-tenant Strategy: Single database with tenant_id scoping
+    | All tenant-specific models will use the BelongsToTenant trait to
+    | automatically scope queries by tenant_id stored in the application
+    | container. Alternative strategies (separate databases per tenant)
+    | would require dynamic connection management.
+    |
     */
 
-    'default' => env('DB_CONNECTION', 'sqlite'),
+    'default' => env('DB_CONNECTION', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
