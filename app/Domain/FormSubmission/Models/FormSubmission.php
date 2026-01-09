@@ -1,0 +1,56 @@
+<?php
+
+namespace App\Domain\FormSubmission\Models;
+
+use App\Domain\Tenant\Models\Tenant;
+use App\Domain\User\Models\User;
+use App\Support\Traits\BelongsToTenant;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+class FormSubmission extends Model
+{
+    use HasFactory, BelongsToTenant;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var list<string>
+     */
+    protected $fillable = [
+        'form_type',
+        'data',
+        'user_id',
+        'tenant_id',
+    ];
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'data' => 'array',
+        ];
+    }
+
+    /**
+     * Get the user that submitted this form (optional).
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the tenant that owns this form submission.
+     * This relationship is also defined in BelongsToTenant trait.
+     */
+    public function tenant(): BelongsTo
+    {
+        return $this->belongsTo(Tenant::class);
+    }
+}
