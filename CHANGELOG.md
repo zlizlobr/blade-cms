@@ -1,3 +1,13 @@
+## [v0.4.0] – 2026-01-09
+
+- release: minor -- Marketing page (#8)
+* Blade layout and basic structure
+
+* Home page with contact form
+
+* Frontend connection and AJAX submission
+- chore: update changelog for v0.3.0
+
 ## [v0.3.0] – 2026-01-09
 
 - release: minor -- Form submissions (#7)
