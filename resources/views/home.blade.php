@@ -135,26 +135,40 @@
                     </p>
                 </div>
 
-                <!-- Success Message -->
-                @if(session('success'))
-                    <div class="mt-8 rounded-md bg-green-50 dark:bg-green-900/20 p-4">
-                        <div class="flex">
-                            <div class="flex-shrink-0">
-                                <svg class="h-5 w-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                            </div>
-                            <div class="ml-3">
-                                <p class="text-sm font-medium text-green-800 dark:text-green-200">
-                                    {{ session('success') }}
-                                </p>
-                            </div>
+                <!-- Success Message (for AJAX) -->
+                <div id="success-message" class="mt-8 rounded-md bg-green-50 dark:bg-green-900/20 p-4 {{ session('success') ? '' : 'hidden' }}">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <svg class="h-5 w-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <p class="message-text text-sm font-medium text-green-800 dark:text-green-200">
+                                {{ session('success') ?? 'Thank you for your submission! We will get back to you soon.' }}
+                            </p>
                         </div>
                     </div>
-                @endif
+                </div>
+
+                <!-- Error Message (for AJAX) -->
+                <div id="error-message" class="mt-8 rounded-md bg-red-50 dark:bg-red-900/20 p-4 hidden">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <svg class="h-5 w-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <p class="message-text text-sm font-medium text-red-800 dark:text-red-200">
+                                An error occurred. Please try again.
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- Contact Form -->
-                <form action="{{ route('forms.submit') }}" method="POST" class="mt-8 space-y-6">
+                <form id="contact-form" action="{{ route('forms.submit') }}" method="POST" class="mt-8 space-y-6">
                     @csrf
 
                     <div>
