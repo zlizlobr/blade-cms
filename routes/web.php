@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Presentation\Http\Controllers\Web\FormSubmissionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,6 +17,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// Public form submission endpoint
+Route::post('/contact', [FormSubmissionController::class, 'store'])->name('forms.submit');
 
 // Admin routes - requires authentication and admin role
 Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(function () {
