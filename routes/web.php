@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Presentation\Http\Controllers\Web\FormSubmissionController;
-use App\Presentation\Http\Controllers\Web\HomeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');

@@ -1,3 +1,19 @@
+## [v0.3.0] – 2026-01-09
+
+- release: minor -- Form submissions (#7)
+* FormSubmission model and migration
+
+* Form submission repository pattern
+
+* chore: ignore */cache files except .gitignore
+
+* chrome: ignore */database.sqlite files except .gitignore
+
+* Contact form endpoint and validation
+
+* Domain event FormSubmitted
+- chore: update changelog for v0.2.0
+
 ## [v0.2.0] – 2026-01-09
 
 - release: minor -- Tenant architecture (#6)
