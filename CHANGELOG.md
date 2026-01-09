@@ -1,3 +1,9 @@
+## [v0.5.0] – 2026-01-09
+
+- release: minor -- Admin MVP (#9)
+* Admin routes and layout
+- chore: update changelog for v0.4.0
+
 ## [v0.4.0] – 2026-01-09
 
 - release: minor -- Marketing page (#8)
