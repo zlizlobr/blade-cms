@@ -3,9 +3,11 @@
 namespace App\Domain\User\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Domain\Tenant\Models\Tenant;
 use App\Domain\User\Enums\UserRole;
 use App\Domain\User\Enums\UserStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -66,5 +68,30 @@ class User extends Authenticatable
     public function isSubscriber(): bool
     {
         return $this->role === UserRole::SUBSCRIBER;
+    }
+
+    /**
+     * Get the tenants that this user belongs to.
+     */
+    public function tenants(): BelongsToMany
+    {
+        return $this->belongsToMany(Tenant::class, 'tenant_user')
+            ->withPivot('role')
+            ->withTimestamps();
+    }
+
+    /**
+     * Get the current tenant for this user.
+     * Returns the tenant stored in the application container, or the first tenant if not set.
+     */
+    public function currentTenant(): ?Tenant
+    {
+        $tenantId = app('tenant.id', null);
+
+        if ($tenantId) {
+            return $this->tenants()->find($tenantId);
+        }
+
+        return $this->tenants()->first();
     }
 }
