@@ -21,6 +21,10 @@
 /storage/pail
 /vendor
 /docs
+/bootstrap/cache/*
+!/bootstrap/cache/.gitignore
+*.sqlite
+*.sqlite-journal
 Homestead.json
 Homestead.yaml
 Thumbs.db
