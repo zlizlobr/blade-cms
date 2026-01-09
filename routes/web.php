@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Presentation\Http\Controllers\Admin\DashboardController;
+use App\Presentation\Http\Controllers\Admin\SubmissionController;
 use App\Presentation\Http\Controllers\Web\FormSubmissionController;
 use App\Presentation\Http\Controllers\Web\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,10 @@ Route::post('/contact', [FormSubmissionController::class, 'store'])->name('forms
 // Admin routes - requires authentication and admin role
 Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Submissions management
+    Route::get('/submissions', [SubmissionController::class, 'index'])->name('submissions.index');
+    Route::get('/submissions/{submission}', [SubmissionController::class, 'show'])->name('submissions.show');
 });
 
 require __DIR__.'/auth.php';

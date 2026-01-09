@@ -136,9 +136,10 @@
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <span class="text-gray-400 dark:text-gray-500 text-xs">
-                                        View (Task 5.3)
-                                    </span>
+                                    <a href="{{ route('admin.submissions.show', $submission) }}"
+                                       class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300">
+                                        View
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach
@@ -158,17 +159,15 @@
     <div class="mt-8">
         <h2 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Quick Actions</h2>
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <div class="relative block w-full rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 p-6 text-center opacity-50">
+            <a href="{{ route('admin.submissions.index') }}"
+               class="relative block w-full rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 p-6 text-center hover:border-gray-400 dark:hover:border-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition">
                 <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
                 <span class="mt-2 block text-sm font-medium text-gray-900 dark:text-white">
                     View Submissions
                 </span>
-                <span class="mt-1 block text-xs text-gray-500 dark:text-gray-400">
-                    (Task 5.3)
-                </span>
-            </div>
+            </a>
 
             <a href="{{ route('home') }}"
                class="relative block w-full rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 p-6 text-center hover:border-gray-400 dark:hover:border-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition">
