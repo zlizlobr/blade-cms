@@ -14,6 +14,10 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin' => \App\Presentation\Http\Middleware\EnsureUserIsAdmin::class,
         ]);
+
+        $middleware->web(append: [
+            \App\Presentation\Http\Middleware\SetTenantContext::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
