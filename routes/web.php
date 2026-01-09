@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Presentation\Http\Controllers\Admin\DashboardController;
 use App\Presentation\Http\Controllers\Web\FormSubmissionController;
 use App\Presentation\Http\Controllers\Web\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -22,8 +23,7 @@ Route::post('/contact', [FormSubmissionController::class, 'store'])->name('forms
 
 // Admin routes - requires authentication and admin role
 Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(function () {
-    // Admin routes will be added here in upcoming tasks
-    // Example: Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 });
 
 require __DIR__.'/auth.php';
