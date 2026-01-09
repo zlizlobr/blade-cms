@@ -1,3 +1,13 @@
+## [v0.1.2] – 2026-01-09
+
+- release: patch -- User (#5)
+* feature: Auth scaffolding for adminy
+
+* Update release, add changelog
+
+* Role-based policies
+- chore: update changelog for v0.1.1
+
 ## [v0.1.1] – 2026-01-08
 
 - release: patch -- add workflow, changelog (#4)
