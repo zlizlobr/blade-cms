@@ -1,3 +1,15 @@
+## [v0.2.0] – 2026-01-09
+
+- release: minor -- Tenant architecture (#6)
+* Tenant model, enumerations, and migrations
+
+* Pivot table tenant_user
+
+* Tenant scope middleware and trait
+
+* Database seeders for test data.
+- chore: update changelog for v0.1.2
+
 ## [v0.1.2] – 2026-01-09
 
 - release: patch -- User (#5)
