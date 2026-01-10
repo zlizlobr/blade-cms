@@ -1,3 +1,11 @@
+## [v0.6.1] – 2026-01-10
+
+- release: patch -- Stabilization and technical debt (#11)
+* Feature tests for critical flow
+
+* README and documentation
+- chore: update changelog for v0.6.0
+
 ## [v0.6.0] – 2026-01-10
 
 - release: minor -- admin dashboard (#10)
