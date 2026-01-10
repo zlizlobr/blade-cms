@@ -1,59 +1,403 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Blade CMS - Laravel SaaS MVP
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A modern **multi-tenant SaaS application** built with Laravel 11, featuring form submission management, tenant isolation, and a comprehensive admin panel.
 
-## About Laravel
+## 🚀 Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Multi-Tenant Architecture** - Single database with automatic tenant scoping
+- **Form Submission System** - Contact forms with event-driven notifications
+- **Admin Panel** - Dashboard with statistics, submission management
+- **Domain-Driven Design** - Clean architecture with separated concerns
+- **Role-Based Access Control** - Admin and Subscriber roles
+- **Event-Driven Architecture** - Queued listeners for scalability
+- **Repository Pattern** - Abstracted data access layer
+- **RESTful API** - JSON responses for AJAX requests
+- **Progressive Enhancement** - Works with or without JavaScript
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 📋 Prerequisites
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP 8.2+
+- Composer 2.x
+- Node.js 18+ & NPM
+- SQLite (or MySQL/PostgreSQL)
 
-## Learning Laravel
+## 🛠️ Installation
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### 1. Clone the repository
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+\`\`\`bash
+git clone <repository-url>
+cd blade-cms
+\`\`\`
 
-## Laravel Sponsors
+### 2. Install dependencies
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+\`\`\`bash
+# Install PHP dependencies
+composer install
 
-### Premium Partners
+# Install Node dependencies
+npm install
+\`\`\`
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 3. Environment setup
 
-## Contributing
+\`\`\`bash
+# Copy environment file
+cp .env.example .env
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# Generate application key
+php artisan key:generate
+\`\`\`
 
-## Code of Conduct
+### 4. Database setup
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+\`\`\`bash
+# Run migrations
+php artisan migrate
 
-## Security Vulnerabilities
+# (Optional) Seed with test data
+php artisan db:seed
+\`\`\`
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 5. Build assets
 
-## License
+\`\`\`bash
+# Development build
+npm run dev
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# Production build
+npm run build
+\`\`\`
+
+### 6. Start development server
+
+\`\`\`bash
+# Start Laravel server
+php artisan serve
+
+# In another terminal, start Vite dev server
+npm run dev
+\`\`\`
+
+Visit: \`http://localhost:8000\`
+
+## 🔐 Test Credentials
+
+After running \`php artisan db:seed\`, you can login with:
+
+**Admin Account:**
+- Email: \`admin@example.com\`
+- Password: \`password\`
+
+**Subscriber Account:**
+- Email: \`subscriber@example.com\`
+- Password: \`password\`
+
+## 📁 Project Structure
+
+\`\`\`
+blade-cms/
+├── app/
+│   ├── Domain/                      # Domain Layer (Business Logic)
+│   │   ├── User/
+│   │   │   ├── Models/              # User, Role, Status
+│   │   │   ├── Enums/               # UserRole, UserStatus
+│   │   │   └── Policies/            # Authorization policies
+│   │   ├── Tenant/
+│   │   │   ├── Models/              # Tenant model
+│   │   │   └── Enums/               # PlanType, TenantStatus
+│   │   ├── FormSubmission/
+│   │   │   ├── Models/              # FormSubmission model
+│   │   │   ├── Services/            # Business logic services
+│   │   │   ├── Repositories/        # Data access layer
+│   │   │   ├── Events/              # Domain events
+│   │   │   └── Listeners/           # Event listeners
+│   │   └── Dashboard/
+│   │       └── Services/            # Dashboard statistics
+│   ├── Presentation/                # Presentation Layer (HTTP)
+│   │   └── Http/
+│   │       ├── Controllers/
+│   │       │   ├── Admin/           # Admin controllers
+│   │       │   └── Web/             # Public controllers
+│   │       ├── Requests/            # Form requests
+│   │       └── Middleware/          # Custom middleware
+│   ├── Infrastructure/              # Infrastructure Layer
+│   │   └── Providers/               # Service providers
+│   └── Support/                     # Support Layer
+│       └── Traits/                  # Reusable traits
+├── database/
+│   ├── migrations/                  # Database migrations
+│   ├── factories/                   # Model factories
+│   └── seeders/                     # Database seeders
+├── resources/
+│   ├── views/                       # Blade templates
+│   │   ├── layouts/                 # Layout files
+│   │   ├── partials/                # Reusable partials
+│   │   └── admin/                   # Admin views
+│   └── js/                          # JavaScript files
+├── routes/
+│   ├── web.php                      # Web routes
+│   └── auth.php                     # Authentication routes
+├── tests/
+│   └── Feature/                     # Feature tests
+└── docs/                            # Documentation
+    ├── PHASE_*.md                   # Phase documentation
+    └── ARCHITECTURE.md              # Architecture overview
+\`\`\`
+
+## 🎯 Key Concepts
+
+### Multi-Tenant Architecture
+
+This application uses a **single-database multi-tenancy** strategy:
+
+- Each model has a \`tenant_id\` foreign key
+- \`BelongsToTenant\` trait provides automatic scoping
+- \`SetTenantContext\` middleware sets tenant from user session
+- All queries are automatically scoped to current tenant
+
+### Domain-Driven Design
+
+The codebase follows DDD principles with clear layer separation:
+
+- **Domain Layer**: Business logic, models, services
+- **Presentation Layer**: Controllers, requests, views
+- **Infrastructure Layer**: Providers, external integrations
+- **Support Layer**: Cross-cutting concerns, helpers
+
+### Event-Driven Architecture
+
+Form submissions trigger events that are processed asynchronously:
+
+\`\`\`php
+// Event is fired
+event(new FormSubmitted(\$submission));
+
+// Listener processes it (queued)
+class SendFormNotification implements ShouldQueue
+{
+    public function handle(FormSubmitted \$event) { }
+}
+\`\`\`
+
+## 🧪 Testing
+
+\`\`\`bash
+# Run all tests
+php artisan test
+
+# Run specific test file
+php artisan test tests/Feature/FormSubmissionTest.php
+
+# Run with coverage
+php artisan test --coverage
+\`\`\`
+
+## 📝 Development Commands
+
+\`\`\`bash
+# Code formatting (Laravel Pint)
+./vendor/bin/pint
+
+# Clear all caches
+php artisan optimize:clear
+
+# Generate IDE helper files
+php artisan ide-helper:generate
+php artisan ide-helper:models
+
+# Queue worker (for development)
+php artisan queue:work
+
+# Database fresh migration with seeding
+php artisan migrate:fresh --seed
+\`\`\`
+
+## 🔧 Configuration
+
+### Environment Variables
+
+Key environment variables to configure:
+
+\`\`\`env
+APP_NAME="Blade CMS"
+APP_ENV=local
+APP_DEBUG=true
+APP_URL=http://localhost
+
+DB_CONNECTION=sqlite
+# Or for MySQL:
+# DB_CONNECTION=mysql
+# DB_HOST=127.0.0.1
+# DB_PORT=3306
+# DB_DATABASE=blade_cms
+# DB_USERNAME=root
+# DB_PASSWORD=
+
+QUEUE_CONNECTION=database
+MAIL_MAILER=log
+\`\`\`
+
+### Cache Configuration
+
+\`\`\`bash
+# Cache routes (production only)
+php artisan route:cache
+
+# Cache config (production only)
+php artisan config:cache
+
+# Cache views
+php artisan view:cache
+\`\`\`
+
+## 📚 Documentation
+
+Detailed documentation for each development phase:
+
+- [Phase 1: Core SaaS](docs/PHASE_1_CORE_SAAS.md) - User management, roles, authentication
+- [Phase 2: Tenant Architecture](docs/PHASE_2_TENANT_ARCHITECTURE.md) - Multi-tenancy setup
+- [Phase 3: Form Submissions](docs/PHASE_3_FORM_SUBMISSIONS.md) - Form system implementation
+- [Phase 4: Marketing Page](docs/PHASE_4_MARKETING_PAGE.md) - Public-facing pages
+- [Phase 5: Admin MVP](docs/PHASE_5_ADMIN_MVP.md) - Admin panel
+- [Architecture Overview](docs/ARCHITECTURE.md) - System architecture details
+
+## 🤝 Contributing
+
+This is a learning project demonstrating best practices for Laravel SaaS applications.
+
+### Code Style
+
+The project follows PSR-12 coding standards. Run Pint before committing:
+
+\`\`\`bash
+./vendor/bin/pint
+\`\`\`
+
+### Git Workflow
+
+\`\`\`bash
+# Create feature branch
+git checkout -b feature/your-feature-name
+
+# Make changes and commit
+git add .
+git commit -m "feat: description"
+
+# Push to remote
+git push origin feature/your-feature-name
+\`\`\`
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**Issue: "Target class [tenant.id] does not exist"**
+
+Solution: Ensure \`bootstrap/providers.php\` exists and contains all service providers.
+
+\`\`\`bash
+php artisan config:clear
+php artisan route:clear
+\`\`\`
+
+**Issue: "Class 'App\\Models\\User' not found"**
+
+Solution: Update imports to use \`App\\Domain\\User\\Models\\User\`.
+
+**Issue: Routes not working**
+
+Solution: Clear route cache:
+
+\`\`\`bash
+php artisan route:clear
+php artisan optimize:clear
+\`\`\`
+
+### Debug Mode
+
+Enable detailed error messages:
+
+\`\`\`env
+APP_DEBUG=true
+LOG_LEVEL=debug
+\`\`\`
+
+Then check logs:
+
+\`\`\`bash
+tail -f storage/logs/laravel.log
+\`\`\`
+
+## 📈 Performance Tips
+
+### Production Optimization
+
+\`\`\`bash
+# Optimize autoloader
+composer install --optimize-autoloader --no-dev
+
+# Cache everything
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+
+# Optimize images
+npm run build
+\`\`\`
+
+### Database Optimization
+
+Add indexes for frequently queried columns:
+
+\`\`\`php
+// In migrations
+\$table->index('tenant_id');
+\$table->index(['tenant_id', 'created_at']);
+\`\`\`
+
+### Queue Workers
+
+Use supervisord or similar to keep queue workers running:
+
+\`\`\`bash
+php artisan queue:work --tries=3
+\`\`\`
+
+## 🔒 Security
+
+- ✅ CSRF protection on all forms
+- ✅ SQL injection prevention via Query Builder
+- ✅ XSS protection via Blade escaping
+- ✅ Tenant isolation enforced globally
+- ✅ Role-based access control
+- ✅ Password hashing with bcrypt
+
+### Security Checklist for Production
+
+- [ ] Set \`APP_DEBUG=false\`
+- [ ] Use HTTPS only
+- [ ] Configure proper CORS settings
+- [ ] Enable rate limiting
+- [ ] Set secure session cookies
+- [ ] Configure Content Security Policy
+- [ ] Regular dependency updates
+
+## 📄 License
+
+This project is open-source software licensed under the MIT license.
+
+## 🙏 Acknowledgments
+
+Built with:
+- [Laravel 11](https://laravel.com)
+- [Tailwind CSS](https://tailwindcss.com)
+- [Alpine.js](https://alpinejs.dev)
+- [Vite](https://vitejs.dev)
+
+---
+
+**Version:** 0.4.0  
+**Last Updated:** January 2026  
+**Maintained by:** Development Team
