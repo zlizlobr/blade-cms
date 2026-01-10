@@ -23,7 +23,7 @@
                             </dt>
                             <dd class="flex items-baseline">
                                 <div class="text-2xl font-semibold text-gray-900 dark:text-white">
-                                    Coming soon
+                                    {{ number_format($totalSubmissions) }}
                                 </div>
                             </dd>
                         </dl>
@@ -48,7 +48,7 @@
                             </dt>
                             <dd class="flex items-baseline">
                                 <div class="text-2xl font-semibold text-gray-900 dark:text-white">
-                                    Coming soon
+                                    {{ number_format($submissionsThisWeek) }}
                                 </div>
                             </dd>
                         </dl>
@@ -73,7 +73,7 @@
                             </dt>
                             <dd class="flex items-baseline">
                                 <div class="text-2xl font-semibold text-gray-900 dark:text-white">
-                                    Coming soon
+                                    {{ number_format($activeUsers) }}
                                 </div>
                             </dd>
                         </dl>
@@ -81,6 +81,78 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Recent Submissions -->
+    <div class="mt-8">
+        <h2 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Recent Submissions</h2>
+        @if($recentSubmissions->count() > 0)
+            <div class="overflow-hidden rounded-lg bg-white dark:bg-gray-800 shadow">
+                <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                    <thead class="bg-gray-50 dark:bg-gray-900">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                                Form Type
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                                Submitted By
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                                Date
+                            </th>
+                            <th scope="col" class="relative px-6 py-3">
+                                <span class="sr-only">Actions</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                        @foreach($recentSubmissions as $submission)
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm font-medium text-gray-900 dark:text-white">
+                                        {{ $submission->form_type }}
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900 dark:text-white">
+                                        @if($submission->user)
+                                            {{ $submission->user->name }}
+                                        @else
+                                            <span class="text-gray-500 dark:text-gray-400">Guest</span>
+                                        @endif
+                                    </div>
+                                    @if($submission->data['email'] ?? null)
+                                        <div class="text-xs text-gray-500 dark:text-gray-400">
+                                            {{ $submission->data['email'] }}
+                                        </div>
+                                    @endif
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900 dark:text-white">
+                                        {{ $submission->created_at->diffForHumans() }}
+                                    </div>
+                                    <div class="text-xs text-gray-500 dark:text-gray-400">
+                                        {{ $submission->created_at->format('M d, Y h:i A') }}
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                    <a href="{{ route('admin.submissions.show', $submission) }}"
+                                       class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300">
+                                        View
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @else
+            <div class="rounded-lg bg-white dark:bg-gray-800 shadow p-6">
+                <p class="text-center text-gray-500 dark:text-gray-400">
+                    No submissions yet. When submissions are received, they will appear here.
+                </p>
+            </div>
+        @endif
     </div>
 
     <!-- Quick Actions -->
@@ -135,7 +207,7 @@
                 <div class="mt-2 text-sm text-indigo-700 dark:text-indigo-300">
                     <p>
                         This is your admin dashboard. You can manage form submissions, view statistics, and configure your application.
-                        Dashboard statistics will be implemented in Task 5.2.
+                        All statistics are automatically scoped to your current tenant.
                     </p>
                 </div>
             </div>

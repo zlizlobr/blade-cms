@@ -82,16 +82,16 @@ class User extends Authenticatable
 
     /**
      * Get the current tenant for this user.
-     * Returns the tenant stored in the application container, or the first tenant if not set.
+     * Returns the tenant stored in current_tenant_id column, or the first tenant if not set.
      */
     public function currentTenant(): ?Tenant
     {
-        $tenantId = app('tenant.id', null);
-
-        if ($tenantId) {
-            return $this->tenants()->find($tenantId);
+        // First try to get from current_tenant_id column
+        if ($this->current_tenant_id) {
+            return $this->tenants()->find($this->current_tenant_id);
         }
 
+        // Otherwise return the first tenant
         return $this->tenants()->first();
     }
 }
