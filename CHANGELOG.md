@@ -1,3 +1,17 @@
+## [v0.6.0] – 2026-01-10
+
+- release: minor -- admin dashboard (#10)
+* Admin dashboard overview
+
+* List of submitted forms, Detail view of submission payload
+- chore: update changelog for v0.5.0
+
+## [v0.5.0] – 2026-01-09
+
+- release: minor -- Admin MVP (#9)
+* Admin routes and layout
+- chore: update changelog for v0.4.0
+
 ## [v0.4.0] – 2026-01-09
 
 - release: minor -- Marketing page (#8)
