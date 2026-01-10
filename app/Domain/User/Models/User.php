@@ -17,6 +17,14 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     /**
+     * Create a new factory instance for the model.
+     */
+    protected static function newFactory()
+    {
+        return \Database\Factories\UserFactory::new();
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
