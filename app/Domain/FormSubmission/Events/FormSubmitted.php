@@ -16,6 +16,5 @@ class FormSubmitted
      */
     public function __construct(
         public FormSubmission $submission
-    ) {
-    }
+    ) {}
 }

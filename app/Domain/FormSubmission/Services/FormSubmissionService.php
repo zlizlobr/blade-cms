@@ -12,8 +12,7 @@ class FormSubmissionService
 {
     public function __construct(
         private readonly FormSubmissionRepositoryInterface $repository
-    ) {
-    }
+    ) {}
 
     /**
      * Create a new form submission.

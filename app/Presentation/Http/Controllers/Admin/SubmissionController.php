@@ -3,38 +3,27 @@
 namespace App\Presentation\Http\Controllers\Admin;
 
 use App\Domain\FormSubmission\Models\FormSubmission;
+use App\Domain\FormSubmission\Services\SubmissionQueryService;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\View\View;
 
 class SubmissionController extends Controller
 {
+    public function __construct(
+        private readonly SubmissionQueryService $queryService
+    ) {}
+
     /**
      * Display a listing of form submissions.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
         $tenantId = auth()->user()->current_tenant_id;
 
-        // Build query
-        $query = FormSubmission::where('tenant_id', $tenantId)->with('user');
+        $filters = $request->only(['search', 'form_type']);
 
-        // Filter by search term
-        if (request('search')) {
-            $search = request('search');
-            $query->where(function ($q) use ($search) {
-                $q->where('data->name', 'like', "%{$search}%")
-                  ->orWhere('data->email', 'like', "%{$search}%")
-                  ->orWhere('data->message', 'like', "%{$search}%");
-            });
-        }
-
-        // Filter by form type
-        if (request('form_type')) {
-            $query->where('form_type', request('form_type'));
-        }
-
-        // Get submissions with pagination
-        $submissions = $query->latest()->paginate(20)->withQueryString();
+        $submissions = $this->queryService->getPaginatedSubmissions($tenantId, $filters);
 
         return view('admin.submissions.index', [
             'submissions' => $submissions,
@@ -46,8 +35,10 @@ class SubmissionController extends Controller
      */
     public function show(FormSubmission $submission): View
     {
+        $tenantId = auth()->user()->current_tenant_id;
+
         // Authorization check - ensure submission belongs to current tenant
-        if ($submission->tenant_id !== auth()->user()->current_tenant_id) {
+        if (! $this->queryService->belongsToTenant($submission, $tenantId)) {
             abort(403, 'Unauthorized access to submission');
         }
 

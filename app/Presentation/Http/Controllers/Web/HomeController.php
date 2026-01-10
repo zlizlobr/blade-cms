@@ -2,7 +2,6 @@
 
 namespace App\Presentation\Http\Controllers\Web;
 
-use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\View\View;
 

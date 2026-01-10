@@ -13,8 +13,7 @@ class FormSubmissionController extends Controller
 {
     public function __construct(
         private readonly FormSubmissionService $formSubmissionService
-    ) {
-    }
+    ) {}
 
     /**
      * Store a new form submission.

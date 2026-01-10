@@ -23,7 +23,7 @@ class SetTenantContext
         }
 
         // 2. If not in session and user is authenticated, get first tenant from user
-        if (!$tenantId && auth()->check()) {
+        if (! $tenantId && auth()->check()) {
             $currentTenant = auth()->user()->currentTenant();
             if ($currentTenant) {
                 $tenantId = $currentTenant->id;

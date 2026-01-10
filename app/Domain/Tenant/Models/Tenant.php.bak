@@ -47,6 +47,7 @@ class Tenant extends Model
             ->withPivot('role')
             ->withTimestamps();
     }
+}
 
     /**
      * Create a new factory instance for the model.
