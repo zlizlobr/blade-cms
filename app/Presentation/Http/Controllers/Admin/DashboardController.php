@@ -2,13 +2,16 @@
 
 namespace App\Presentation\Http\Controllers\Admin;
 
-use App\Domain\FormSubmission\Models\FormSubmission;
-use App\Domain\User\Models\User;
+use App\Domain\Dashboard\Services\DashboardService;
 use Illuminate\Routing\Controller;
 use Illuminate\View\View;
 
 class DashboardController extends Controller
 {
+    public function __construct(
+        private readonly DashboardService $dashboardService
+    ) {}
+
     /**
      * Display the admin dashboard.
      */
@@ -16,31 +19,8 @@ class DashboardController extends Controller
     {
         $tenantId = auth()->user()->current_tenant_id;
 
-        // Total submissions count
-        $totalSubmissions = FormSubmission::where('tenant_id', $tenantId)->count();
+        $statistics = $this->dashboardService->getStatistics($tenantId);
 
-        // Submissions this week
-        $submissionsThisWeek = FormSubmission::where('tenant_id', $tenantId)
-            ->where('created_at', '>=', now()->startOfWeek())
-            ->count();
-
-        // Active users count (users who belong to this tenant)
-        $activeUsers = User::whereHas('tenants', function ($query) use ($tenantId) {
-            $query->where('tenant_id', $tenantId);
-        })->count();
-
-        // Recent submissions (last 5)
-        $recentSubmissions = FormSubmission::where('tenant_id', $tenantId)
-            ->with('user')
-            ->latest()
-            ->take(5)
-            ->get();
-
-        return view('admin.dashboard', [
-            'totalSubmissions' => $totalSubmissions,
-            'submissionsThisWeek' => $submissionsThisWeek,
-            'activeUsers' => $activeUsers,
-            'recentSubmissions' => $recentSubmissions,
-        ]);
+        return view('admin.dashboard', $statistics);
     }
 }

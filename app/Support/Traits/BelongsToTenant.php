@@ -22,7 +22,7 @@ trait BelongsToTenant
 
         // Automatically set tenant_id when creating new records
         static::creating(function ($model) {
-            if (!$model->tenant_id && $tenantId = app('tenant.id')) {
+            if (! $model->tenant_id && $tenantId = app('tenant.id')) {
                 $model->tenant_id = $tenantId;
             }
         });

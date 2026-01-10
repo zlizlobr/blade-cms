@@ -11,9 +11,6 @@ class FormSubmissionRepository implements FormSubmissionRepositoryInterface
 {
     /**
      * Create a new form submission.
-     *
-     * @param array $data
-     * @return FormSubmission
      */
     public function create(array $data): FormSubmission
     {
@@ -22,9 +19,6 @@ class FormSubmissionRepository implements FormSubmissionRepositoryInterface
 
     /**
      * Find form submissions by tenant ID.
-     *
-     * @param int $tenantId
-     * @return Collection
      */
     public function findByTenant(int $tenantId): Collection
     {
@@ -33,9 +27,6 @@ class FormSubmissionRepository implements FormSubmissionRepositoryInterface
 
     /**
      * Find a form submission by ID.
-     *
-     * @param int $id
-     * @return FormSubmission|null
      */
     public function findById(int $id): ?FormSubmission
     {
@@ -44,8 +35,6 @@ class FormSubmissionRepository implements FormSubmissionRepositoryInterface
 
     /**
      * Get a query builder instance.
-     *
-     * @return Builder
      */
     public function query(): Builder
     {
@@ -54,9 +43,6 @@ class FormSubmissionRepository implements FormSubmissionRepositoryInterface
 
     /**
      * Filter form submissions by form type.
-     *
-     * @param string $type
-     * @return Builder
      */
     public function filterByFormType(string $type): Builder
     {
@@ -65,8 +51,6 @@ class FormSubmissionRepository implements FormSubmissionRepositoryInterface
 
     /**
      * Eager load user relationship.
-     *
-     * @return Builder
      */
     public function withUser(): Builder
     {
@@ -75,9 +59,6 @@ class FormSubmissionRepository implements FormSubmissionRepositoryInterface
 
     /**
      * Get paginated form submissions.
-     *
-     * @param int $perPage
-     * @return LengthAwarePaginator
      */
     public function paginated(int $perPage = 15): LengthAwarePaginator
     {
