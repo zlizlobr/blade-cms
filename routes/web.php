@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\ProfileController;
 use App\Presentation\Http\Controllers\Admin\DashboardController;
 use App\Presentation\Http\Controllers\Admin\SubmissionController;
@@ -8,7 +9,9 @@ use App\Presentation\Http\Controllers\Web\HomeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// Language switcher
+Route::post('/locale/{locale}', [LocaleController::class, 'change'])->name('locale.change');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -19,9 +22,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-// Public form submission endpoint
-Route::post('/contact', [FormSubmissionController::class, 'store'])->name('forms.submit');
 
 // Public form submission endpoint
 Route::post('/contact', [FormSubmissionController::class, 'store'])->name('forms.submit');
