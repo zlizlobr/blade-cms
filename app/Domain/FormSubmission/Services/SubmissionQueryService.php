@@ -9,6 +9,15 @@ use Illuminate\Database\Eloquent\Builder;
 class SubmissionQueryService
 {
     /**
+     * Create service instance.
+     * Factory method for convenient instantiation outside Laravel container.
+     */
+    public static function create(): self
+    {
+        return new self();
+    }
+
+    /**
      * Get paginated submissions for a tenant with optional filters.
      *
      * @param  array{search?: string, form_type?: string}  $filters

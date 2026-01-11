@@ -9,6 +9,15 @@ use Illuminate\Support\Collection;
 class DashboardService
 {
     /**
+     * Create service instance.
+     * Factory method for convenient instantiation outside Laravel container.
+     */
+    public static function create(): self
+    {
+        return new self();
+    }
+
+    /**
      * Get dashboard statistics for a tenant.
      *
      * @return array{totalSubmissions: int, submissionsThisWeek: int, activeUsers: int, recentSubmissions: Collection}
