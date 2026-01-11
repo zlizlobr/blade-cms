@@ -1,3 +1,25 @@
+## [v0.6.2] – 2026-01-11
+
+- release: patch -- Internationalization (i18n) (#12)
+* Add i18n configuration and language structure
+
+* Implement locale detection middleware and language switcher
+
+* Add language switcher component to UI
+
+* Refactor public pages to use translation keys
+
+* Refactor authentication pages to use translations
+
+* Add multilingual support to Tenant model
+
+* Refactor admin interface to use translations
+
+* Add comprehensive i18n feature tests
+
+* Add i18n feature to README feature list
+- chore: update changelog for v0.6.1
+
 ## [v0.6.1] – 2026-01-10
 
 - release: patch -- Stabilization and technical debt (#11)
