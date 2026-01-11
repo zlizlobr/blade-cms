@@ -1,3 +1,47 @@
+## [v0.6.2] – 2026-01-11
+
+- release: patch -- Internationalization (i18n) (#12)
+* Add i18n configuration and language structure
+
+* Implement locale detection middleware and language switcher
+
+* Add language switcher component to UI
+
+* Refactor public pages to use translation keys
+
+* Refactor authentication pages to use translations
+
+* Add multilingual support to Tenant model
+
+* Refactor admin interface to use translations
+
+* Add comprehensive i18n feature tests
+
+* Add i18n feature to README feature list
+- chore: update changelog for v0.6.1
+
+## [v0.6.1] – 2026-01-10
+
+- release: patch -- Stabilization and technical debt (#11)
+* Feature tests for critical flow
+
+* README and documentation
+- chore: update changelog for v0.6.0
+
+## [v0.6.0] – 2026-01-10
+
+- release: minor -- admin dashboard (#10)
+* Admin dashboard overview
+
+* List of submitted forms, Detail view of submission payload
+- chore: update changelog for v0.5.0
+
+## [v0.5.0] – 2026-01-09
+
+- release: minor -- Admin MVP (#9)
+* Admin routes and layout
+- chore: update changelog for v0.4.0
+
 ## [v0.4.0] – 2026-01-09
 
 - release: minor -- Marketing page (#8)
