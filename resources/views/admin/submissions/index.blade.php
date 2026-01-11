@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
-@section('title', 'Form Submissions')
+@section('title', __('admin.submissions.title'))
 
-@section('header', 'Form Submissions')
+@section('header', __('admin.submissions.title'))
 
 @section('content')
     <!-- Filters and Search -->
@@ -12,16 +12,16 @@
                 <input type="search"
                        name="search"
                        value="{{ request('search') }}"
-                       placeholder="Search by name, email..."
+                       placeholder="{{ __('admin.submissions.search_placeholder') }}"
                        class="flex-1 rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                 <button type="submit"
                         class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md shadow-sm">
-                    Search
+                    {{ __('admin.submissions.search') }}
                 </button>
                 @if(request('search'))
                     <a href="{{ route('admin.submissions.index') }}"
                        class="px-4 py-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-md shadow-sm">
-                        Clear
+                        {{ __('admin.submissions.clear') }}
                     </a>
                 @endif
             </form>
@@ -30,8 +30,8 @@
             <select name="form_type"
                     onchange="window.location.href='{{ route('admin.submissions.index') }}?form_type=' + this.value"
                     class="rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                <option value="">All Types</option>
-                <option value="contact" {{ request('form_type') === 'contact' ? 'selected' : '' }}>Contact</option>
+                <option value="">{{ __('admin.submissions.all_types') }}</option>
+                <option value="contact" {{ request('form_type') === 'contact' ? 'selected' : '' }}>{{ __('admin.submissions.contact') }}</option>
             </select>
         </div>
     </div>
@@ -43,19 +43,19 @@
                 <thead class="bg-gray-50 dark:bg-gray-900">
                     <tr>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                            ID
+                            {{ __('admin.submissions.id') }}
                         </th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                            Form Type
+                            {{ __('admin.submissions.form_type') }}
                         </th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                            Submitted By
+                            {{ __('admin.submissions.submitted_by') }}
                         </th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                            Date
+                            {{ __('admin.submissions.date') }}
                         </th>
                         <th scope="col" class="relative px-6 py-3">
-                            <span class="sr-only">Actions</span>
+                            <span class="sr-only">{{ __('admin.submissions.actions') }}</span>
                         </th>
                     </tr>
                 </thead>
@@ -77,7 +77,7 @@
                                     @if($submission->user)
                                         {{ $submission->user->name }}
                                     @else
-                                        <span class="text-gray-500 dark:text-gray-400">Guest</span>
+                                        <span class="text-gray-500 dark:text-gray-400">{{ __('admin.submissions.guest') }}</span>
                                     @endif
                                 </div>
                                 @if($submission->data['email'] ?? null)
@@ -97,7 +97,7 @@
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <a href="{{ route('admin.submissions.show', $submission) }}"
                                    class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300">
-                                    View
+                                    {{ __('admin.submissions.view') }}
                                 </a>
                             </td>
                         </tr>
@@ -115,19 +115,19 @@
             <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
-            <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-white">No submissions</h3>
+            <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('admin.submissions.no_submissions') }}</h3>
             <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
                 @if(request('search'))
-                    No submissions found matching your search criteria.
+                    {{ __('admin.submissions.no_submissions_found') }}
                 @else
-                    No form submissions have been received yet.
+                    {{ __('admin.submissions.no_submissions_received') }}
                 @endif
             </p>
             @if(request('search'))
                 <div class="mt-6">
                     <a href="{{ route('admin.submissions.index') }}"
                        class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
-                        View all submissions
+                        {{ __('admin.submissions.view_all_submissions') }}
                     </a>
                 </div>
             @endif
