@@ -38,6 +38,9 @@
 
             <!-- Right Side (Auth Links) -->
             <div class="hidden sm:flex sm:items-center sm:space-x-4">
+                <!-- Language Switcher -->
+                <x-language-switcher />
+
                 @auth
                     <span class="text-sm text-gray-700 dark:text-gray-300">
                         {{ auth()->user()->name }}
@@ -77,6 +80,11 @@
         <!-- Mobile Navigation Menu -->
         <div x-data="{ mobileMenuOpen: false }" x-show="mobileMenuOpen" class="sm:hidden">
             <div class="pt-2 pb-3 space-y-1">
+                <!-- Language Switcher Mobile -->
+                <div class="px-3 pb-2">
+                    <x-language-switcher />
+                </div>
+
                 <a href="{{ route('home') }}"
                    class="block pl-3 pr-4 py-2 border-l-4 text-base font-medium transition duration-150 ease-in-out
                           {{ request()->routeIs('home')
