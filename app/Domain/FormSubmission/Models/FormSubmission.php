@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\FormSubmission\Models;
 
 use App\Domain\Tenant\Models\Tenant;

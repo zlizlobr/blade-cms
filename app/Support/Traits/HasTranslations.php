@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Support\Traits;
 
 use Illuminate\Support\Facades\App;
