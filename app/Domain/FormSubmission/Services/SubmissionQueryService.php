@@ -8,7 +8,7 @@ use App\Domain\FormSubmission\Models\FormSubmission;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 
-class SubmissionQueryService
+class SubmissionQueryService implements SubmissionQueryServiceInterface
 {
     /**
      * Create service instance.

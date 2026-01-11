@@ -11,7 +11,7 @@ use App\Domain\User\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-class FormSubmissionService
+class FormSubmissionService implements FormSubmissionServiceInterface
 {
     public function __construct(
         private readonly FormSubmissionRepositoryInterface $repository

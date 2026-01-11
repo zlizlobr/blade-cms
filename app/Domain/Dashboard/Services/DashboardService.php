@@ -8,7 +8,7 @@ use App\Domain\FormSubmission\Models\FormSubmission;
 use App\Domain\User\Models\User;
 use Illuminate\Support\Collection;
 
-class DashboardService
+class DashboardService implements DashboardServiceInterface
 {
     /**
      * Create service instance.

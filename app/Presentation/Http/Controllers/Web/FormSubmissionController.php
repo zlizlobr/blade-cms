@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Presentation\Http\Controllers\Web;
 
 use App\Domain\FormSubmission\Events\FormSubmitted;
-use App\Domain\FormSubmission\Services\FormSubmissionService;
+use App\Domain\FormSubmission\Services\FormSubmissionServiceInterface;
 use App\Presentation\Http\Requests\FormSubmission\StoreFormSubmissionRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -14,7 +14,7 @@ use Illuminate\Routing\Controller;
 class FormSubmissionController extends Controller
 {
     public function __construct(
-        private readonly FormSubmissionService $formSubmissionService
+        private readonly FormSubmissionServiceInterface $formSubmissionService
     ) {}
 
     /**

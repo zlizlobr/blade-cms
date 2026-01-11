@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Presentation\Http\Controllers\Admin;
 
 use App\Domain\FormSubmission\Models\FormSubmission;
-use App\Domain\FormSubmission\Services\SubmissionQueryService;
+use App\Domain\FormSubmission\Services\SubmissionQueryServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\View\View;
@@ -13,7 +13,7 @@ use Illuminate\View\View;
 class SubmissionController extends Controller
 {
     public function __construct(
-        private readonly SubmissionQueryService $queryService
+        private readonly SubmissionQueryServiceInterface $queryService
     ) {}
 
     /**
