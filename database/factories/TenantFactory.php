@@ -20,7 +20,10 @@ class TenantFactory extends Factory
         $name = fake()->company();
 
         return [
-            'name' => $name,
+            'name' => [
+                'cs' => $name,
+                'en' => $name,
+            ],
             'slug' => Str::slug($name).'-'.fake()->unique()->numberBetween(1, 9999),
             'plan' => PlanType::FREE,
             'status' => TenantStatus::ACTIVE,

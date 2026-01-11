@@ -16,7 +16,10 @@ class TenantSeeder extends Seeder
     {
         // Tenant 1: Acme Corp (Pro plan)
         Tenant::create([
-            'name' => 'Acme Corporation',
+            'name' => [
+                'cs' => 'Acme Corporation',
+                'en' => 'Acme Corporation',
+            ],
             'slug' => 'acme-corp',
             'plan' => PlanType::PRO,
             'status' => TenantStatus::ACTIVE,
@@ -24,7 +27,10 @@ class TenantSeeder extends Seeder
 
         // Tenant 2: TechStart (Basic plan)
         Tenant::create([
-            'name' => 'TechStart Inc',
+            'name' => [
+                'cs' => 'TechStart Inc',
+                'en' => 'TechStart Inc',
+            ],
             'slug' => 'techstart',
             'plan' => PlanType::BASIC,
             'status' => TenantStatus::ACTIVE,
@@ -32,7 +38,10 @@ class TenantSeeder extends Seeder
 
         // Tenant 3: LocalBiz (Free plan)
         Tenant::create([
-            'name' => 'Local Business',
+            'name' => [
+                'cs' => 'Místní Podnik',
+                'en' => 'Local Business',
+            ],
             'slug' => 'localbiz',
             'plan' => PlanType::FREE,
             'status' => TenantStatus::ACTIVE,

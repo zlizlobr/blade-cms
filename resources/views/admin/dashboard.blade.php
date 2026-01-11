@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
-@section('title', 'Dashboard')
+@section('title', __('admin.dashboard.title'))
 
-@section('header', 'Dashboard')
+@section('header', __('admin.dashboard.title'))
 
 @section('content')
     <!-- Stats Grid -->
@@ -19,7 +19,7 @@
                     <div class="ml-5 w-0 flex-1">
                         <dl>
                             <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
-                                Total Submissions
+                                {{ __('admin.dashboard.total_submissions') }}
                             </dt>
                             <dd class="flex items-baseline">
                                 <div class="text-2xl font-semibold text-gray-900 dark:text-white">
@@ -44,7 +44,7 @@
                     <div class="ml-5 w-0 flex-1">
                         <dl>
                             <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
-                                This Week
+                                {{ __('admin.dashboard.this_week') }}
                             </dt>
                             <dd class="flex items-baseline">
                                 <div class="text-2xl font-semibold text-gray-900 dark:text-white">
@@ -69,7 +69,7 @@
                     <div class="ml-5 w-0 flex-1">
                         <dl>
                             <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">
-                                Active Users
+                                {{ __('admin.dashboard.active_users') }}
                             </dt>
                             <dd class="flex items-baseline">
                                 <div class="text-2xl font-semibold text-gray-900 dark:text-white">
@@ -85,23 +85,23 @@
 
     <!-- Recent Submissions -->
     <div class="mt-8">
-        <h2 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Recent Submissions</h2>
+        <h2 class="text-lg font-medium text-gray-900 dark:text-white mb-4">{{ __('admin.dashboard.recent_submissions') }}</h2>
         @if($recentSubmissions->count() > 0)
             <div class="overflow-hidden rounded-lg bg-white dark:bg-gray-800 shadow">
                 <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                     <thead class="bg-gray-50 dark:bg-gray-900">
                         <tr>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                                Form Type
+                                {{ __('admin.submissions.form_type') }}
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                                Submitted By
+                                {{ __('admin.submissions.submitted_by') }}
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                                Date
+                                {{ __('admin.submissions.date') }}
                             </th>
                             <th scope="col" class="relative px-6 py-3">
-                                <span class="sr-only">Actions</span>
+                                <span class="sr-only">{{ __('admin.submissions.actions') }}</span>
                             </th>
                         </tr>
                     </thead>
@@ -118,7 +118,7 @@
                                         @if($submission->user)
                                             {{ $submission->user->name }}
                                         @else
-                                            <span class="text-gray-500 dark:text-gray-400">Guest</span>
+                                            <span class="text-gray-500 dark:text-gray-400">{{ __('admin.submissions.guest') }}</span>
                                         @endif
                                     </div>
                                     @if($submission->data['email'] ?? null)
@@ -138,7 +138,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <a href="{{ route('admin.submissions.show', $submission) }}"
                                        class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300">
-                                        View
+                                        {{ __('admin.submissions.view') }}
                                     </a>
                                 </td>
                             </tr>
@@ -149,7 +149,7 @@
         @else
             <div class="rounded-lg bg-white dark:bg-gray-800 shadow p-6">
                 <p class="text-center text-gray-500 dark:text-gray-400">
-                    No submissions yet. When submissions are received, they will appear here.
+                    {{ __('admin.dashboard.no_submissions_yet') }}
                 </p>
             </div>
         @endif
@@ -157,7 +157,7 @@
 
     <!-- Quick Actions -->
     <div class="mt-8">
-        <h2 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Quick Actions</h2>
+        <h2 class="text-lg font-medium text-gray-900 dark:text-white mb-4">{{ __('admin.dashboard.quick_actions') }}</h2>
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <a href="{{ route('admin.submissions.index') }}"
                class="relative block w-full rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 p-6 text-center hover:border-gray-400 dark:hover:border-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition">
@@ -165,7 +165,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
                 <span class="mt-2 block text-sm font-medium text-gray-900 dark:text-white">
-                    View Submissions
+                    {{ __('admin.dashboard.view_submissions') }}
                 </span>
             </a>
 
@@ -175,7 +175,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                 </svg>
                 <span class="mt-2 block text-sm font-medium text-gray-900 dark:text-white">
-                    Visit Site
+                    {{ __('admin.dashboard.visit_site') }}
                 </span>
             </a>
 
@@ -186,7 +186,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
                 <span class="mt-2 block text-sm font-medium text-gray-900 dark:text-white">
-                    Settings
+                    {{ __('admin.dashboard.settings') }}
                 </span>
             </a>
         </div>
@@ -202,12 +202,11 @@
             </div>
             <div class="ml-3 flex-1">
                 <h3 class="text-sm font-medium text-indigo-800 dark:text-indigo-200">
-                    Welcome to Admin Dashboard
+                    {{ __('admin.dashboard.welcome_title') }}
                 </h3>
                 <div class="mt-2 text-sm text-indigo-700 dark:text-indigo-300">
                     <p>
-                        This is your admin dashboard. You can manage form submissions, view statistics, and configure your application.
-                        All statistics are automatically scoped to your current tenant.
+                        {{ __('admin.dashboard.welcome_message') }}
                     </p>
                 </div>
             </div>

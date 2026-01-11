@@ -5,13 +5,14 @@ namespace App\Domain\Tenant\Models;
 use App\Domain\Tenant\Enums\PlanType;
 use App\Domain\Tenant\Enums\TenantStatus;
 use App\Domain\User\Models\User;
+use App\Support\Traits\HasTranslations;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Tenant extends Model
 {
-    use HasFactory;
+    use HasFactory, HasTranslations;
 
     /**
      * The attributes that are mass assignable.
@@ -33,9 +34,20 @@ class Tenant extends Model
     protected function casts(): array
     {
         return [
+            'name' => 'array',
             'plan' => PlanType::class,
             'status' => TenantStatus::class,
         ];
+    }
+
+    /**
+     * Get the list of translatable attributes.
+     *
+     * @return array
+     */
+    protected function getTranslatableAttributes(): array
+    {
+        return ['name'];
     }
 
     /**

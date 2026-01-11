@@ -1,15 +1,15 @@
 @extends('layouts.admin')
 
-@section('title', 'Submission Detail')
+@section('title', __('admin.submission.title'))
 
 @section('header')
     <div class="flex items-center justify-between">
         <div>
-            Submission #{{ $submission->id }}
+            {{ __('admin.submission.title') }} #{{ $submission->id }}
         </div>
         <a href="{{ route('admin.submissions.index') }}"
            class="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
-            ← Back to list
+            {{ __('admin.submission.back_to_list') }}
         </a>
     </div>
 @endsection
@@ -23,7 +23,7 @@
             <div class="bg-white dark:bg-gray-800 shadow rounded-lg">
                 <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
                     <h2 class="text-lg font-medium text-gray-900 dark:text-white">
-                        Form Data
+                        {{ __('admin.submission.form_data') }}
                     </h2>
                 </div>
                 <div class="px-6 py-4">
@@ -48,7 +48,7 @@
                         </dl>
                     @else
                         <p class="text-sm text-gray-500 dark:text-gray-400">
-                            No form data available.
+                            {{ __('admin.submission.no_form_data') }}
                         </p>
                     @endif
                 </div>
@@ -58,7 +58,7 @@
             <div class="bg-white dark:bg-gray-800 shadow rounded-lg">
                 <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
                     <h2 class="text-lg font-medium text-gray-900 dark:text-white">
-                        Raw JSON Data
+                        {{ __('admin.submission.raw_json_data') }}
                     </h2>
                 </div>
                 <div class="px-6 py-4">
@@ -73,14 +73,14 @@
             <div class="bg-white dark:bg-gray-800 shadow rounded-lg">
                 <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
                     <h2 class="text-lg font-medium text-gray-900 dark:text-white">
-                        Information
+                        {{ __('admin.submission.information') }}
                     </h2>
                 </div>
                 <div class="px-6 py-4 space-y-4">
                     <!-- Form Type -->
                     <div>
                         <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">
-                            Form Type
+                            {{ __('admin.submission.form_type') }}
                         </dt>
                         <dd class="mt-1">
                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200">
@@ -92,7 +92,7 @@
                     <!-- Submitted By -->
                     <div>
                         <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">
-                            Submitted By
+                            {{ __('admin.submission.submitted_by') }}
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 dark:text-white">
                             @if($submission->user)
@@ -101,7 +101,7 @@
                                     {{ $submission->user->email }}
                                 </div>
                             @else
-                                <span class="text-gray-500 dark:text-gray-400">Guest</span>
+                                <span class="text-gray-500 dark:text-gray-400">{{ __('admin.submission.guest') }}</span>
                             @endif
                         </dd>
                     </div>
@@ -109,7 +109,7 @@
                     <!-- Submitted At -->
                     <div>
                         <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">
-                            Submitted At
+                            {{ __('admin.submission.submitted_at') }}
                         </dt>
                         <dd class="mt-1 text-sm text-gray-900 dark:text-white">
                             <div>{{ $submission->created_at->format('M d, Y') }}</div>
@@ -122,7 +122,7 @@
                     <!-- Submission ID -->
                     <div>
                         <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">
-                            Submission ID
+                            {{ __('admin.submission.submission_id') }}
                         </dt>
                         <dd class="mt-1 text-sm font-mono text-gray-900 dark:text-white">
                             #{{ $submission->id }}
@@ -135,18 +135,18 @@
             <div class="bg-white dark:bg-gray-800 shadow rounded-lg">
                 <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
                     <h2 class="text-lg font-medium text-gray-900 dark:text-white">
-                        Actions
+                        {{ __('admin.submission.actions') }}
                     </h2>
                 </div>
                 <div class="px-6 py-4 space-y-3">
                     <button type="button"
                             onclick="navigator.clipboard.writeText(document.getElementById('raw-json').textContent)"
                             class="w-full inline-flex justify-center items-center px-4 py-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        Copy JSON
+                        {{ __('admin.submission.copy_json') }}
                     </button>
                     <a href="{{ route('admin.submissions.index') }}"
                        class="w-full inline-flex justify-center items-center px-4 py-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        Back to List
+                        {{ __('admin.submission.back_to_list_btn') }}
                     </a>
                 </div>
             </div>
