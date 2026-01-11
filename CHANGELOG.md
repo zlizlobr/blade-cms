@@ -1,3 +1,15 @@
+## [v0.6.3] – 2026-01-11
+
+- release: patch -- Refactoring (#13)
+* Add static factory methods to service classes for convenient instantiation outside Laravel container
+
+* Add strict type declarations to all PHP files in the application layer
+
+* Add service interfaces and update controllers to depend on abstractions for improved testability
+
+* Update README with refactoring documentation and modern PHP practices showcase
+- chore: update changelog for v0.6.2
+
 ## [v0.6.2] – 2026-01-11
 
 - release: patch -- Internationalization (i18n) (#12)
