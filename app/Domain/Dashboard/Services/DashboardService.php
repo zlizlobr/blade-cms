@@ -1,13 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\Dashboard\Services;
 
 use App\Domain\FormSubmission\Models\FormSubmission;
 use App\Domain\User\Models\User;
 use Illuminate\Support\Collection;
 
-class DashboardService
+class DashboardService implements DashboardServiceInterface
 {
+    /**
+     * Create service instance.
+     * Factory method for convenient instantiation outside Laravel container.
+     */
+    public static function create(): self
+    {
+        return new self();
+    }
+
     /**
      * Get dashboard statistics for a tenant.
      *

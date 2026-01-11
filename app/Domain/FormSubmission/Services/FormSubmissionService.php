@@ -1,18 +1,30 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\FormSubmission\Services;
 
 use App\Domain\FormSubmission\Models\FormSubmission;
+use App\Domain\FormSubmission\Repositories\FormSubmissionRepository;
 use App\Domain\FormSubmission\Repositories\FormSubmissionRepositoryInterface;
 use App\Domain\User\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-class FormSubmissionService
+class FormSubmissionService implements FormSubmissionServiceInterface
 {
     public function __construct(
         private readonly FormSubmissionRepositoryInterface $repository
     ) {}
+
+    /**
+     * Create service instance with default dependencies.
+     * Factory method for convenient instantiation outside Laravel container.
+     */
+    public static function create(): self
+    {
+        return new self(new FormSubmissionRepository());
+    }
 
     /**
      * Create a new form submission.

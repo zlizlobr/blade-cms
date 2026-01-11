@@ -1,13 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Domain\FormSubmission\Services;
 
 use App\Domain\FormSubmission\Models\FormSubmission;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 
-class SubmissionQueryService
+class SubmissionQueryService implements SubmissionQueryServiceInterface
 {
+    /**
+     * Create service instance.
+     * Factory method for convenient instantiation outside Laravel container.
+     */
+    public static function create(): self
+    {
+        return new self();
+    }
+
     /**
      * Get paginated submissions for a tenant with optional filters.
      *

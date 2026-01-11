@@ -1,15 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Presentation\Http\Controllers\Admin;
 
-use App\Domain\Dashboard\Services\DashboardService;
+use App\Domain\Dashboard\Services\DashboardServiceInterface;
 use Illuminate\Routing\Controller;
 use Illuminate\View\View;
 
 class DashboardController extends Controller
 {
     public function __construct(
-        private readonly DashboardService $dashboardService
+        private readonly DashboardServiceInterface $dashboardService
     ) {}
 
     /**
