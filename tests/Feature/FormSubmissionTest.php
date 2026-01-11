@@ -22,7 +22,10 @@ class FormSubmissionTest extends TestCase
 
         // Create a tenant for testing
         $this->tenant = Tenant::create([
-            'name' => 'Test Tenant',
+            'name' => [
+                'cs' => 'Testovací Tenant',
+                'en' => 'Test Tenant',
+            ],
             'slug' => 'test-tenant',
         ]);
 

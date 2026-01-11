@@ -23,7 +23,10 @@ class AdminTest extends TestCase
 
         // Create tenant
         $this->tenant = Tenant::create([
-            'name' => 'Test Tenant',
+            'name' => [
+                'cs' => 'Testovací Tenant',
+                'en' => 'Test Tenant',
+            ],
             'slug' => 'test-tenant',
         ]);
 
@@ -137,7 +140,10 @@ class AdminTest extends TestCase
     {
         // Create another tenant
         $otherTenant = Tenant::create([
-            'name' => 'Other Tenant',
+            'name' => [
+                'cs' => 'Jiný Tenant',
+                'en' => 'Other Tenant',
+            ],
             'slug' => 'other-tenant',
         ]);
 
@@ -224,7 +230,10 @@ class AdminTest extends TestCase
     {
         // Create another tenant with submissions
         $otherTenant = Tenant::create([
-            'name' => 'Other Tenant',
+            'name' => [
+                'cs' => 'Jiný Tenant',
+                'en' => 'Other Tenant',
+            ],
             'slug' => 'other-tenant',
         ]);
 
