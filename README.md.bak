@@ -14,7 +14,7 @@ A modern **multi-tenant SaaS application** built with Laravel 11, featuring form
 - **RESTful API** - JSON responses for AJAX requests
 - **Progressive Enhancement** - Works with or without JavaScript
 
-- **Internationalization (i18n)** - Czech and English support with automatic locale detection## 📋 Prerequisites
+## 📋 Prerequisites
 
 - PHP 8.2+
 - Composer 2.x
@@ -262,7 +262,6 @@ Detailed documentation for each development phase:
 - [Phase 4: Marketing Page](docs/PHASE_4_MARKETING_PAGE.md) - Public-facing pages
 - [Phase 5: Admin MVP](docs/PHASE_5_ADMIN_MVP.md) - Admin panel
 - [Architecture Overview](docs/ARCHITECTURE.md) - System architecture details
-- [Internationalization](docs/INTERNATIONALIZATION.md) - i18n implementation guide
 
 ## 🤝 Contributing
 
