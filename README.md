@@ -8,13 +8,17 @@ A modern **multi-tenant SaaS application** built with Laravel 11, featuring form
 - **Form Submission System** - Contact forms with event-driven notifications
 - **Admin Panel** - Dashboard with statistics, submission management
 - **Domain-Driven Design** - Clean architecture with separated concerns
+- **Strict Type Safety** - PHP 8.1+ strict types across entire codebase
+- **Dependency Injection** - Constructor injection with static factory methods
+- **Interface-Based Design** - Program to abstractions, not implementations
 - **Role-Based Access Control** - Admin and Subscriber roles
 - **Event-Driven Architecture** - Queued listeners for scalability
 - **Repository Pattern** - Abstracted data access layer
 - **RESTful API** - JSON responses for AJAX requests
 - **Progressive Enhancement** - Works with or without JavaScript
+- **Internationalization (i18n)** - Czech and English support with automatic locale detection
 
-- **Internationalization (i18n)** - Czech and English support with automatic locale detection## 📋 Prerequisites
+## 📋 Prerequisites
 
 - PHP 8.2+
 - Composer 2.x
@@ -161,10 +165,61 @@ This application uses a **single-database multi-tenancy** strategy:
 
 The codebase follows DDD principles with clear layer separation:
 
-- **Domain Layer**: Business logic, models, services
+- **Domain Layer**: Business logic, models, services, repositories
 - **Presentation Layer**: Controllers, requests, views
 - **Infrastructure Layer**: Providers, external integrations
 - **Support Layer**: Cross-cutting concerns, helpers
+
+### Modern PHP Practices
+
+This project implements modern PHP 8.1+ features and patterns:
+
+**Strict Type Safety:**
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\Domain\FormSubmission\Services;
+
+class FormSubmissionService implements FormSubmissionServiceInterface
+{
+    public function createSubmission(array $data): FormSubmission
+    {
+        // All parameters and return types are strictly enforced
+    }
+}
+```
+
+**Dependency Injection with Factory Methods:**
+```php
+class BookingService
+{
+    // Constructor injection
+    public function __construct(
+        private readonly BookingRepositoryInterface $repository
+    ) {}
+
+    // Static factory for convenience
+    public static function create(): self
+    {
+        return new self(new BookingRepository());
+    }
+}
+```
+
+**Interface-Based Design:**
+```php
+// Controllers depend on interfaces, not implementations
+class DashboardController extends Controller
+{
+    public function __construct(
+        private readonly DashboardServiceInterface $service
+    ) {}
+}
+```
+
+All services implement interfaces, making the codebase highly testable and maintainable.
 
 ### Event-Driven Architecture
 
@@ -254,6 +309,15 @@ php artisan view:cache
 
 ## 📚 Documentation
 
+### Core Documentation
+
+- [TASK.md](TASK.md) - Complete refactoring task documentation (Strict Types, DI, Service Layer)
+- [Claude Code Rules](.claude/claude.md) - Development guidelines and coding standards
+- [Architecture Overview](docs/ARCHITECTURE.md) - System architecture details
+- [Internationalization](docs/INTERNATIONALIZATION.md) - i18n implementation guide
+
+### Phase Documentation
+
 Detailed documentation for each development phase:
 
 - [Phase 1: Core SaaS](docs/PHASE_1_CORE_SAAS.md) - User management, roles, authentication
@@ -261,8 +325,15 @@ Detailed documentation for each development phase:
 - [Phase 3: Form Submissions](docs/PHASE_3_FORM_SUBMISSIONS.md) - Form system implementation
 - [Phase 4: Marketing Page](docs/PHASE_4_MARKETING_PAGE.md) - Public-facing pages
 - [Phase 5: Admin MVP](docs/PHASE_5_ADMIN_MVP.md) - Admin panel
-- [Architecture Overview](docs/ARCHITECTURE.md) - System architecture details
-- [Internationalization](docs/INTERNATIONALIZATION.md) - i18n implementation guide
+
+### Claude Code Integration
+
+This project includes configuration for [Claude Code](https://claude.ai/code):
+
+- `.claude/claude.md` - Project-specific coding standards and architecture rules
+- `TASK.md` - Refactoring task documentation and workflow
+
+When working with Claude Code, these rules are automatically applied to ensure consistent code quality and adherence to project standards.
 
 ## 🤝 Contributing
 
@@ -270,11 +341,21 @@ This is a learning project demonstrating best practices for Laravel SaaS applica
 
 ### Code Style
 
-The project follows PSR-12 coding standards. Run Pint before committing:
+The project follows strict coding standards:
+
+- **PSR-12** coding style
+- **Strict types** (`declare(strict_types=1);`) in all PHP files
+- **Full type hints** on all parameters and return values
+- **Interface-based design** for all services
+- **Constructor injection** for dependencies
+
+Run Pint before committing:
 
 \`\`\`bash
 ./vendor/bin/pint
 \`\`\`
+
+See [`.claude/claude.md`](.claude/claude.md) for complete coding standards.
 
 ### Git Workflow
 
@@ -399,6 +480,20 @@ Built with:
 
 ---
 
-**Version:** 0.4.0  
-**Last Updated:** January 2026  
+## 🏗️ Architecture Refactoring
+
+This project has undergone a comprehensive refactoring to implement modern PHP practices:
+
+### Completed Phases
+
+✅ **Phase 1: Strict Typing** - All PHP files use `declare(strict_types=1);` with full type hints
+✅ **Phase 2: Dependency Injection** - Constructor injection with static factory methods
+✅ **Phase 3: Service Layer** - Interface-based design with clean separation of concerns
+
+See [TASK.md](TASK.md) for detailed refactoring documentation and workflow.
+
+---
+
+**Version:** 1.0.0
+**Last Updated:** January 2026
 **Maintained by:** Development Team
