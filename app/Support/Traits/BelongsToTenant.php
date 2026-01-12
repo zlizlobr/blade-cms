@@ -17,14 +17,14 @@ trait BelongsToTenant
     {
         // Automatically scope queries to current tenant
         static::addGlobalScope('tenant', function (Builder $query) {
-            if ($tenantId = app('tenant.id')) {
+            if (app()->bound('tenant.id') && $tenantId = app('tenant.id')) {
                 $query->where('tenant_id', $tenantId);
             }
         });
 
         // Automatically set tenant_id when creating new records
         static::creating(function ($model) {
-            if (! $model->tenant_id && $tenantId = app('tenant.id')) {
+            if (! $model->tenant_id && app()->bound('tenant.id') && $tenantId = app('tenant.id')) {
                 $model->tenant_id = $tenantId;
             }
         });
