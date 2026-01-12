@@ -27,7 +27,7 @@ class SubmissionController extends Controller
 
         $submissions = $this->queryService->getPaginatedSubmissions($tenantId, $filters);
 
-        return view('admin.submissions.index', [
+        return view('admin::submissions.index', [
             'submissions' => $submissions,
         ]);
     }
@@ -44,7 +44,7 @@ class SubmissionController extends Controller
             abort(403, 'Unauthorized access to submission');
         }
 
-        return view('admin.submissions.show', [
+        return view('admin::submissions.show', [
             'submission' => $submission,
         ]);
     }
