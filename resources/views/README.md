@@ -4,64 +4,133 @@
 
 ```
 resources/views/
-├── admin/                      # Admin-specific views
-│   ├── dashboard.blade.php
-│   └── submissions/
+├── admin/                      # Admin area (dashboard, management)
+│   ├── layouts/
+│   │   └── admin.blade.php    # Admin layout with sidebar
+│   ├── partials/
+│   │   └── admin-sidebar.blade.php
+│   ├── components/             # Admin-specific components
+│   ├── dashboard/
+│   │   └── index.blade.php
+│   ├── submissions/
+│   │   ├── index.blade.php
+│   │   └── show.blade.php
+│   ├── profile/
+│   │   ├── edit.blade.php
+│   │   └── partials/
+│   └── users/
+├── public/                     # Public website
+│   ├── layouts/
+│   │   └── main.blade.php     # Main public layout
+│   ├── partials/
+│   │   ├── header.blade.php
+│   │   ├── footer.blade.php
+│   │   └── navigation.blade.php
+│   ├── components/             # Public-specific components
+│   └── pages/
+│       └── home.blade.php
 ├── auth/                       # Authentication views
-├── components/                 # Shared Blade components (available app-wide)
+│   ├── layouts/
+│   │   └── guest.blade.php    # Auth layout
+│   ├── login.blade.php
+│   ├── register.blade.php
+│   ├── forgot-password.blade.php
+│   ├── reset-password.blade.php
+│   ├── verify-email.blade.php
+│   └── confirm-password.blade.php
+├── components/                 # Global shared components
 │   ├── application-logo.blade.php
 │   ├── input-error.blade.php
+│   ├── input-label.blade.php
+│   ├── text-input.blade.php
+│   ├── primary-button.blade.php
 │   └── ...
-├── profile/                    # User profile views
-├── themes/                     # Theme system
-│   └── default/               # Default theme
-│       ├── layouts/           # Theme layouts
-│       │   ├── admin.blade.php
-│       │   ├── marketing.blade.php
-│       │   ├── guest.blade.php
-│       │   └── app.blade.php
-│       └── partials/          # Theme partials
-│           ├── header.blade.php
-│           ├── footer.blade.php
-│           └── admin-sidebar.blade.php
-└── dashboard.blade.php
+└── themes/                     # Legacy theme system (preserved)
+    └── default/
+        └── layouts/
+            ├── app.blade.php
+            └── welcome.blade.php
 ```
 
-## Theme System
+## View Namespace System
 
-### Using Theme Namespace
+The application uses Laravel's view namespace feature for clear separation of concerns:
 
-The theme system uses Laravel's view namespace feature. All theme-specific layouts and partials are accessed using the `theme::` prefix.
+**Registered namespaces:**
+- `admin::` → `resources/views/admin/`
+- `public::` → `resources/views/public/`
+- `auth.` → `resources/views/auth/` (no namespace, default Laravel behavior)
 
-**Registered namespace:**
-- `theme::` → `resources/views/themes/default/`
-
-### Extending Layouts
-
-When creating new views, extend theme layouts using the namespace:
-
-```blade
-{{-- Admin pages --}}
-@extends('theme::layouts.admin')
-
-{{-- Marketing/public pages --}}
-@extends('theme::layouts.marketing')
-
-{{-- Guest pages (login, register) --}}
-@extends('theme::layouts.guest')
-
-{{-- Authenticated user pages --}}
-@extends('theme::layouts.app')
+**Configured in:**
+```
+app/Infrastructure/Providers/ViewServiceProvider.php
 ```
 
-### Including Partials
+## Creating Views
 
-Include theme partials using the namespace:
+### Admin Views
 
+Admin views use the `admin::` namespace and extend the admin layout with sidebar.
+
+**Example:**
 ```blade
-@include('theme::partials.header')
-@include('theme::partials.footer')
-@include('theme::partials.admin-sidebar')
+{{-- resources/views/admin/users/index.blade.php --}}
+@extends('admin::layouts.admin')
+
+@section('title', __('Users Management'))
+
+@section('header', __('Users'))
+
+@section('content')
+    <div class="grid grid-cols-1 gap-6">
+        {{-- Your content here --}}
+    </div>
+@endsection
+```
+
+**Include admin partials:**
+```blade
+@include('admin::partials.admin-sidebar')
+@include('admin::profile.partials.update-profile-form')
+```
+
+### Public Views
+
+Public views use the `public::` namespace and extend the public layout.
+
+**Example:**
+```blade
+{{-- resources/views/public/pages/about.blade.php --}}
+@extends('public::layouts.main')
+
+@section('title', __('About Us'))
+
+@section('content')
+    <section class="py-12">
+        {{-- Your content here --}}
+    </section>
+@endsection
+```
+
+**Include public partials:**
+```blade
+@include('public::partials.header')
+@include('public::partials.footer')
+@include('public::partials.navigation')
+```
+
+### Auth Views
+
+Auth views use standard Laravel paths (no namespace) for better compatibility with Laravel Breeze/Jetstream.
+
+**Example:**
+```blade
+{{-- resources/views/auth/login.blade.php --}}
+@extends('auth.layouts.guest')
+
+@section('content')
+    {{-- Login form --}}
+@endsection
 ```
 
 ### Using Components
@@ -75,179 +144,249 @@ Components are shared across the entire application and don't require a namespac
 <x-primary-button>{{ __('Submit') }}</x-primary-button>
 ```
 
-## Creating New Views
-
-### Admin View Example
-
-```blade
-{{-- resources/views/admin/users/index.blade.php --}}
-@extends('theme::layouts.admin')
-
-@section('title', __('Users Management'))
-
-@section('header', __('Users'))
-
-@section('content')
-    <div class="grid grid-cols-1 gap-6">
-        {{-- Your content here --}}
-    </div>
-@endsection
-```
-
-### Public/Marketing View Example
-
-```blade
-{{-- resources/views/about.blade.php --}}
-@extends('theme::layouts.marketing')
-
-@section('title', __('About Us'))
-
-@section('content')
-    <section class="py-12">
-        {{-- Your content here --}}
-    </section>
-@endsection
-```
-
 ## Available Layouts
 
-### 1. Admin Layout (`theme::layouts.admin`)
+### 1. Admin Layout (`admin::layouts.admin`)
+
 **Purpose:** Admin dashboard and management pages
+
 **Features:**
-- Sidebar navigation
-- Top bar with user menu
-- Tenant indicator
-- Mobile responsive sidebar
+- Sidebar navigation (desktop + mobile responsive)
+- Top bar with user menu and tenant indicator
 - Flash messages support
+- Dark mode support
 
 **Sections:**
-- `@section('title')` - Page title
-- `@section('header')` - Page header (optional)
-- `@section('content')` - Main content
+- `@section('title')` - Page title (appears in browser tab)
+- `@section('header')` - Page header (H1 above content)
+- `@section('content')` - Main content area
 
-### 2. Marketing Layout (`theme::layouts.marketing`)
-**Purpose:** Public-facing pages (home, landing pages)
+**Example:**
+```blade
+@extends('admin::layouts.admin')
+
+@section('title', __('Dashboard'))
+@section('header', __('Dashboard'))
+
+@section('content')
+    {{-- Your admin content --}}
+@endsection
+```
+
+### 2. Public Main Layout (`public::layouts.main`)
+
+**Purpose:** Public-facing pages (home, about, contact)
+
 **Features:**
 - Header with navigation
 - Footer
-- Clean, minimal structure
+- Clean, marketing-focused design
+- Responsive
 
 **Sections:**
 - `@section('title')` - Page title
 - `@section('content')` - Main content
 
-### 3. Guest Layout (`theme::layouts.guest`)
+**Example:**
+```blade
+@extends('public::layouts.main')
+
+@section('title', __('Home') . ' - ' . config('app.name'))
+
+@section('content')
+    {{-- Your public content --}}
+@endsection
+```
+
+### 3. Guest Layout (`auth.layouts.guest`)
+
 **Purpose:** Authentication pages (login, register, password reset)
+
 **Features:**
 - Centered card layout
-- Logo/branding
-- Minimal navigation
+- Application logo
+- Minimal design, focused on forms
 
 **Sections:**
 - `@section('content')` - Main content
 
-### 4. App Layout (`theme::layouts.app`)
-**Purpose:** Authenticated user pages (dashboard, profile)
-**Features:**
-- Top navigation
-- User menu
-- Responsive design
+**Example:**
+```blade
+@extends('auth.layouts.guest')
 
-**Sections:**
-- `@section('header')` - Page header
-- `@section('content')` - Main content
-
-## Theme Configuration
-
-The theme namespace is registered in:
+@section('content')
+    <form method="POST" action="{{ route('login') }}">
+        {{-- Login form fields --}}
+    </form>
+@endsection
 ```
-app/Infrastructure/Providers/ThemeViewServiceProvider.php
-```
+
+## Controllers and View Usage
+
+### Admin Controllers
 
 ```php
-public function boot(): void
+// app/Presentation/Http/Controllers/Admin/DashboardController.php
+
+public function index(): View
 {
-    View::addNamespace('theme', resource_path('views/themes/default'));
+    return view('admin::dashboard.index', [
+        'data' => $data
+    ]);
+}
+```
+
+### Public Controllers
+
+```php
+// app/Presentation/Http/Controllers/Web/HomeController.php
+
+public function index(): View
+{
+    return view('public::pages.home');
+}
+```
+
+### Auth Controllers
+
+```php
+// Standard Laravel auth controllers
+
+public function create(): View
+{
+    return view('auth.login');
 }
 ```
 
 ## Best Practices
 
-### 1. Always Use Namespace for Theme Files
-```blade
-✅ @extends('theme::layouts.admin')
-❌ @extends('layouts.admin')
+### 1. Always Use Correct Namespace
 
-✅ @include('theme::partials.header')
-❌ @include('partials.header')
+```blade
+✅ Admin views
+@extends('admin::layouts.admin')
+@include('admin::partials.admin-sidebar')
+
+✅ Public views
+@extends('public::layouts.main')
+@include('public::partials.header')
+
+✅ Auth views (no namespace)
+@extends('auth.layouts.guest')
+
+❌ Don't mix namespaces
+@extends('theme::layouts.admin')  // Old, deprecated
 ```
 
 ### 2. Components Don't Need Namespace
+
 ```blade
-✅ <x-input-label />
-❌ <x-theme::input-label />
+✅ Global components (correct)
+<x-input-label />
+<x-primary-button />
+
+❌ Don't use namespace with components
+<x-admin::input-label />
 ```
 
-### 3. Directory Placement
-- Admin-specific views → `resources/views/admin/`
-- Public views → `resources/views/` (root)
-- Theme layouts → `resources/views/themes/default/layouts/`
-- Theme partials → `resources/views/themes/default/partials/`
-- Shared components → `resources/views/components/`
+### 3. Directory Placement Rules
 
-### 4. Keep Theme Structure Clean
+- **Admin-specific** → `resources/views/admin/`
+- **Public pages** → `resources/views/public/pages/`
+- **Public partials** → `resources/views/public/partials/`
+- **Auth views** → `resources/views/auth/`
+- **Global components** → `resources/views/components/`
+
+### 4. Keep Structure Clean
+
 - **Layouts** = Full page structures with HTML skeleton
 - **Partials** = Reusable sections (header, footer, sidebar)
-- **Components** = Small, reusable UI elements
+- **Components** = Small, reusable UI elements (buttons, inputs)
+- **Pages** = Actual content pages that extend layouts
 
-## Switching Themes (Future)
+## Architecture Benefits
 
-To support multiple themes in the future:
+### Clear Separation of Concerns
+- Admin logic is isolated in `admin/`
+- Public logic is isolated in `public/`
+- No confusion about what belongs where
 
-1. Create new theme directory:
-   ```
-   resources/views/themes/custom-theme/
-   ```
+### Namespace Isolation
+- No name collisions between admin and public views
+- Clear, explicit view references: `admin::` vs `public::`
 
-2. Update `ThemeViewServiceProvider`:
-   ```php
-   $themeName = config('app.theme', 'default');
-   View::addNamespace('theme', resource_path("views/themes/{$themeName}"));
-   ```
+### Scalability
+- Easy to add new sections (e.g., `api::` for API documentation views)
+- Easy to add tenant-specific views in the future
 
-3. Add to `.env`:
-   ```env
-   THEME=custom-theme
-   ```
+### Maintainability
+- Changes to admin don't affect public and vice versa
+- Easier to find and organize views
+
+## View Configuration
+
+The view namespaces are registered in:
+
+```php
+// app/Infrastructure/Providers/ViewServiceProvider.php
+
+public function boot(): void
+{
+    // Register theme namespace (legacy support)
+    View::addNamespace('theme', resource_path('views/themes/default'));
+
+    // Register admin namespace
+    View::addNamespace('admin', resource_path('views/admin'));
+
+    // Register public namespace
+    View::addNamespace('public', resource_path('views/public'));
+}
+```
+
+This provider is registered in `bootstrap/providers.php`.
 
 ## Troubleshooting
 
 ### View Not Found Error
+
 ```
-View [theme::layouts.admin] not found.
+View [admin::dashboard.index] not found.
 ```
 
 **Solutions:**
 1. Clear view cache: `php artisan view:clear`
 2. Clear config cache: `php artisan config:clear`
-3. Verify file exists at: `resources/views/themes/default/layouts/admin.blade.php`
-4. Check `ThemeViewServiceProvider` is registered in `bootstrap/providers.php`
+3. Clear bootstrap cache: `rm -rf bootstrap/cache/*.php`
+4. Verify file exists at: `resources/views/admin/dashboard/index.blade.php`
+5. Check `ViewServiceProvider` is registered in `bootstrap/providers.php`
 
 ### Namespace Not Registered
-```php
-// Check registered namespaces in tinker
+
+```bash
+# Check registered namespaces in tinker
 php artisan tinker
 >>> app('view')->getFinder()->getHints();
 ```
 
 You should see:
 ```php
-"theme" => [
-    "/path/to/resources/views/themes/default"
+[
+    "admin" => ["/path/to/resources/views/admin"],
+    "public" => ["/path/to/resources/views/public"],
+    "theme" => ["/path/to/resources/views/themes/default"]
 ]
 ```
 
-## Commands
+### Check if View Exists
+
+```bash
+php artisan tinker
+>>> view()->exists('admin::dashboard.index')  // Should return true
+>>> view()->exists('public::pages.home')      // Should return true
+>>> view()->exists('auth.login')              // Should return true
+```
+
+## Useful Commands
 
 ```bash
 # Clear all view caches
@@ -256,34 +395,88 @@ php artisan view:clear
 # Clear config cache
 php artisan config:clear
 
-# Optimize (compile all views)
-php artisan optimize
+# Clear application cache
+php artisan cache:clear
 
-# Check if view exists
-php artisan tinker
->>> view()->exists('theme::layouts.admin')
+# Clear all caches (including bootstrap)
+php artisan optimize:clear
+
+# List all routes and their views
+php artisan route:list
+
+# Boot application and check for errors
+php artisan about
 ```
 
 ## Multi-Tenancy Support
 
 All views respect tenant context:
-- User's current tenant is available via `auth()->user()->currentTenant()`
-- Admin layouts display current tenant name
+- User's current tenant: `auth()->user()->currentTenant()`
+- Admin layouts display current tenant name in top bar
 - All queries are automatically scoped to current tenant
+- Tenant switching updates view context automatically
 
 ## Internationalization
 
-All text should be wrapped in translation helpers:
+All user-facing text should be wrapped in translation helpers:
 
 ```blade
+{{-- Admin translations --}}
 {{ __('admin.dashboard.title') }}
+{{ __('admin.submissions.total') }}
+
+{{-- Public translations --}}
 {{ __('app.hero.welcome') }}
+{{ __('app.footer.copyright') }}
+
+{{-- Auth translations --}}
+{{ __('auth.login.title') }}
 ```
 
 Translation files are located in `lang/` directory.
 
+## Dark Mode Support
+
+All layouts support dark mode using Tailwind CSS:
+
+```blade
+{{-- Dark mode classes --}}
+<div class="bg-white dark:bg-gray-800">
+    <p class="text-gray-900 dark:text-white">
+        Content that adapts to dark mode
+    </p>
+</div>
+```
+
+Dark mode toggle is available in:
+- Admin layout: Top bar
+- Public layout: Navigation
+- Preference is saved to browser localStorage
+
+## Migration from Old Structure
+
+If you're updating old views, here's the migration guide:
+
+### Old Theme System (Deprecated)
+```blade
+@extends('theme::layouts.admin')      → @extends('admin::layouts.admin')
+@extends('theme::layouts.marketing')  → @extends('public::layouts.main')
+@extends('theme::layouts.guest')      → @extends('auth.layouts.guest')
+@include('theme::partials.header')    → @include('public::partials.header')
+```
+
+### Controller Updates
+```php
+// Old
+return view('admin.dashboard');
+
+// New
+return view('admin::dashboard.index');
+```
+
 ---
 
 **Last Updated:** 2026-01-12
-**Theme System Version:** 1.0
+**View Architecture Version:** 2.0 (Refactored)
 **Laravel Version:** 11.x
+**PHP Version:** 8.1+
