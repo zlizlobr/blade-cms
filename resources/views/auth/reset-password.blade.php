@@ -1,4 +1,4 @@
-@extends('theme::layouts.guest')
+@extends('auth.layouts.guest')
 
 @section('content')
     <form method="POST" action="{{ route('password.store') }}">

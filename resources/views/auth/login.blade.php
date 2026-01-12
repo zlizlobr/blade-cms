@@ -1,4 +1,4 @@
-@extends('theme::layouts.guest')
+@extends('auth.layouts.guest')
 
 @section('content')
     <!-- Session Status -->
