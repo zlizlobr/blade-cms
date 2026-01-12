@@ -22,11 +22,7 @@
                 </a>
 
                 @auth
-                    <a href="{{ route('dashboard') }}"
-                       class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-700 transition duration-150 ease-in-out">
-                        {{ __('app.nav.dashboard') }}
-                    </a>
-
+                   
                     @if(auth()->user()->isAdmin())
                         <a href="{{ route('admin.dashboard') }}"
                            class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-700 transition duration-150 ease-in-out">

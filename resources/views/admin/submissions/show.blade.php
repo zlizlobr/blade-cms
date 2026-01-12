@@ -1,4 +1,4 @@
-@extends('theme::layouts.admin')
+@extends('admin::layouts.admin')
 
 @section('title', __('admin.submission.title'))
 
