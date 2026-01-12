@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+declare(strict_types=1);
+
 namespace App\Support\Traits;
 
 use App\Domain\Tenant\Models\Tenant;

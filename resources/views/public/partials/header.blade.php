@@ -19,6 +19,7 @@
                               ? 'border-indigo-400 dark:border-indigo-600 text-gray-900 dark:text-gray-100'
                               : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-700' }}">
                     {{ __('app.nav.home') }}
+                    {{ __('app.nav.home') }}
                 </a>
 
                 @auth
@@ -27,6 +28,7 @@
                         <a href="{{ route('admin.dashboard') }}"
                            class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-700 transition duration-150 ease-in-out">
                             {{ __('app.nav.admin') }}
+                            {{ __('app.nav.admin') }}
                         </a>
                     @endif
                 @endauth
@@ -34,6 +36,9 @@
 
             <!-- Right Side (Auth Links) -->
             <div class="hidden sm:flex sm:items-center sm:space-x-4">
+                <!-- Language Switcher -->
+                <x-language-switcher />
+
                 <!-- Language Switcher -->
                 <x-language-switcher />
 
@@ -46,15 +51,18 @@
                         <button type="submit"
                                 class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out">
                             {{ __('app.nav.logout') }}
+                            {{ __('app.nav.logout') }}
                         </button>
                     </form>
                 @else
                     <a href="{{ route('login') }}"
                        class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 transition duration-150 ease-in-out">
                         {{ __('app.nav.login') }}
+                        {{ __('app.nav.login') }}
                     </a>
                     <a href="{{ route('register') }}"
                        class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out">
+                        {{ __('app.nav.register') }}
                         {{ __('app.nav.register') }}
                     </a>
                 @endauth
@@ -81,11 +89,17 @@
                     <x-language-switcher />
                 </div>
 
+                <!-- Language Switcher Mobile -->
+                <div class="px-3 pb-2">
+                    <x-language-switcher />
+                </div>
+
                 <a href="{{ route('home') }}"
                    class="block pl-3 pr-4 py-2 border-l-4 text-base font-medium transition duration-150 ease-in-out
                           {{ request()->routeIs('home')
                               ? 'border-indigo-400 text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-900/50'
                               : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600' }}">
+                    {{ __('app.nav.home') }}
                     {{ __('app.nav.home') }}
                 </a>
 
@@ -93,11 +107,13 @@
                     <a href="{{ route('dashboard') }}"
                        class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition duration-150 ease-in-out">
                         {{ __('app.nav.dashboard') }}
+                        {{ __('app.nav.dashboard') }}
                     </a>
 
                     @if(auth()->user()->isAdmin())
                         <a href="{{ route('admin.dashboard') }}"
                            class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition duration-150 ease-in-out">
+                            {{ __('app.nav.admin') }}
                             {{ __('app.nav.admin') }}
                         </a>
                     @endif
@@ -114,6 +130,7 @@
                                 <button type="submit"
                                         class="block w-full text-left pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition duration-150 ease-in-out">
                                     {{ __('app.nav.logout') }}
+                                    {{ __('app.nav.logout') }}
                                 </button>
                             </form>
                         </div>
@@ -122,9 +139,11 @@
                     <a href="{{ route('login') }}"
                        class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition duration-150 ease-in-out">
                         {{ __('app.nav.login') }}
+                        {{ __('app.nav.login') }}
                     </a>
                     <a href="{{ route('register') }}"
                        class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition duration-150 ease-in-out">
+                        {{ __('app.nav.register') }}
                         {{ __('app.nav.register') }}
                     </a>
                 @endauth
