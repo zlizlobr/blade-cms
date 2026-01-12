@@ -19,9 +19,9 @@
                         <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                             @auth
                                 <div class="rounded-md shadow">
-                                    <a href="{{ route('dashboard') }}"
+                                    <a href="{{ auth()->user()->isAdmin() ? route('admin.dashboard') : route('profile.edit') }}"
                                        class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 md:py-4 md:text-lg md:px-10 transition duration-150 ease-in-out">
-                                        {{ __('app.hero.cta_dashboard') }}
+                                        {{ auth()->user()->isAdmin() ? __('app.hero.cta_dashboard') : __('Profile') }}
                                     </a>
                                 </div>
                             @else
