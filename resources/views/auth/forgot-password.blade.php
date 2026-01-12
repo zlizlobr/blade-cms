@@ -1,4 +1,6 @@
-<x-guest-layout>
+@extends('theme::layouts.guest')
+
+@section('content')
     <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
         {{ __('auth.forgot_password.description') }}
     </div>
@@ -22,4 +24,4 @@
             </x-primary-button>
         </div>
     </form>
-</x-guest-layout>
+@endsection
