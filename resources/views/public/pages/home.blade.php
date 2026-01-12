@@ -1,4 +1,4 @@
-@extends('theme::layouts.marketing')
+@extends('public::layouts.main')
 
 @section('title', __('app.hero.title_1') . ' ' . __('app.hero.title_2') . ' - ' . config('app.name'))
 
