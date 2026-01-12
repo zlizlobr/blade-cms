@@ -23,6 +23,6 @@ class DashboardController extends Controller
 
         $statistics = $this->dashboardService->getStatistics($tenantId);
 
-        return view('admin.dashboard', $statistics);
+        return view('admin::dashboard.index', $statistics);
     }
 }
