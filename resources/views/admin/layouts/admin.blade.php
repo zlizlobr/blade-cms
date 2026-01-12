@@ -40,12 +40,12 @@
                  x-transition:leave-end="-translate-x-full"
                  class="fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-gray-800 lg:hidden"
                  style="display: none;">
-                @include('theme::partials.admin-sidebar')
+                @include('admin::partials.admin-sidebar')
             </div>
 
             <!-- Desktop sidebar -->
             <div class="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
-                @include('theme::partials.admin-sidebar')
+                @include('admin::partials.admin-sidebar')
             </div>
 
             <!-- Main content -->
