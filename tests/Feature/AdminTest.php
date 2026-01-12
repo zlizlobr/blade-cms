@@ -155,21 +155,22 @@ class AdminTest extends TestCase
         $response = $this->actingAs($this->admin)
             ->get(route('admin.submissions.show', $submission));
 
-        $response->assertStatus(403);
+        // Submission from another tenant returns 404 because of route model binding with tenant scope
+        $response->assertStatus(404);
     }
 
     /** @test */
     public function admin_dashboard_shows_correct_statistics(): void
     {
-        // Create submissions (3 this week, 2 older)
+        // Create submissions (3 this week from Monday, 2 older)
         FormSubmission::factory()->count(3)->create([
             'tenant_id' => $this->tenant->id,
-            'created_at' => now()->subDays(1),
+            'created_at' => now()->startOfWeek()->addDays(2), // Wednesday this week
         ]);
 
         FormSubmission::factory()->count(2)->create([
             'tenant_id' => $this->tenant->id,
-            'created_at' => now()->subWeeks(2),
+            'created_at' => now()->subWeeks(2), // 2 weeks ago
         ]);
 
         $response = $this->actingAs($this->admin)

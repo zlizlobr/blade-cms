@@ -151,17 +151,20 @@ class FormSubmissionTest extends TestCase
     /** @test */
     public function form_submission_event_is_dispatched(): void
     {
-        Event::fake();
+        Event::fake([FormSubmitted::class]);
 
-        $this->post(route('forms.submit'), [
+        $response = $this->post(route('forms.submit'), [
             'form_type' => 'contact',
             'name' => 'Event Test',
             'email' => 'event@example.com',
             'message' => 'Testing event',
         ]);
 
+        $response->assertRedirect(); // Non-AJAX requests redirect back
+
         Event::assertDispatched(FormSubmitted::class, function ($event) {
             return $event->submission->form_type === 'contact'
+                && isset($event->submission->data['email'])
                 && $event->submission->data['email'] === 'event@example.com';
         });
     }
