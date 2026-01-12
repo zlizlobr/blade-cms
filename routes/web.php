@@ -31,4 +31,9 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::get('/submissions/{submission}', [SubmissionController::class, 'show'])->name('submissions.show');
 });
 
+// Backward compatibility: Dashboard route alias for Laravel Breeze auth controllers
+Route::get('/dashboard', function () {
+    return redirect()->route('admin.dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
 require __DIR__.'/auth.php';

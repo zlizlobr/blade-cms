@@ -55,7 +55,7 @@ class AdminTest extends TestCase
             ->get(route('admin.dashboard'));
 
         $response->assertStatus(200);
-        $response->assertViewIs('admin.dashboard');
+        $response->assertViewIs('admin::dashboard.index');
     }
 
     /** @test */
@@ -86,7 +86,7 @@ class AdminTest extends TestCase
             ->get(route('admin.submissions.index'));
 
         $response->assertStatus(200);
-        $response->assertViewIs('admin.submissions.index');
+        $response->assertViewIs('admin::submissions.index');
         $response->assertViewHas('submissions');
     }
 
@@ -116,7 +116,7 @@ class AdminTest extends TestCase
             ->get(route('admin.submissions.show', $submission));
 
         $response->assertStatus(200);
-        $response->assertViewIs('admin.submissions.show');
+        $response->assertViewIs('admin::submissions.show');
         $response->assertViewHas('submission');
         $response->assertSee('Test User');
         $response->assertSee('test@example.com');
