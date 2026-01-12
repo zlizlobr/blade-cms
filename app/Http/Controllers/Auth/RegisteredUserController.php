@@ -2,8 +2,11 @@
 
 declare(strict_types=1);
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Auth;
 
+use App\Domain\User\Enums\UserRole;
 use App\Domain\User\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Registered;
@@ -47,6 +50,10 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        // Redirect based on user role
+        // Admins go to dashboard, subscribers to home page
+        return $user->role === UserRole::ADMIN
+            ? redirect()->route('admin.dashboard')
+            : redirect()->route('home');
     }
 }

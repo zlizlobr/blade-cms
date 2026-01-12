@@ -1,5 +1,6 @@
-@extends('layouts.marketing')
+@extends('public::layouts.main')
 
+@section('title', __('app.hero.title_1') . ' ' . __('app.hero.title_2') . ' - ' . config('app.name'))
 @section('title', __('app.hero.title_1') . ' ' . __('app.hero.title_2') . ' - ' . config('app.name'))
 
 @section('content')
@@ -12,16 +13,19 @@
                         <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white sm:text-5xl md:text-6xl">
                             <span class="block xl:inline">{{ __('app.hero.title_1') }}</span>
                             <span class="block text-indigo-600 dark:text-indigo-400 xl:inline">{{ __('app.hero.title_2') }}</span>
+                            <span class="block xl:inline">{{ __('app.hero.title_1') }}</span>
+                            <span class="block text-indigo-600 dark:text-indigo-400 xl:inline">{{ __('app.hero.title_2') }}</span>
                         </h1>
                         <p class="mt-3 text-base text-gray-500 dark:text-gray-400 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                            {{ __('app.hero.description') }}
                             {{ __('app.hero.description') }}
                         </p>
                         <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                             @auth
                                 <div class="rounded-md shadow">
-                                    <a href="{{ route('dashboard') }}"
+                                    <a href="{{ auth()->user()->isAdmin() ? route('admin.dashboard') : route('profile.edit') }}"
                                        class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 md:py-4 md:text-lg md:px-10 transition duration-150 ease-in-out">
-                                        {{ __('app.hero.cta_dashboard') }}
+                                        {{ auth()->user()->isAdmin() ? __('app.hero.cta_dashboard') : __('Profile') }}
                                     </a>
                                 </div>
                             @else
@@ -29,11 +33,13 @@
                                     <a href="{{ route('register') }}"
                                        class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 md:py-4 md:text-lg md:px-10 transition duration-150 ease-in-out">
                                         {{ __('app.hero.cta_get_started') }}
+                                        {{ __('app.hero.cta_get_started') }}
                                     </a>
                                 </div>
                                 <div class="mt-3 sm:mt-0 sm:ml-3">
                                     <a href="#contact"
                                        class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 dark:text-indigo-300 bg-indigo-100 dark:bg-indigo-900/30 hover:bg-indigo-200 dark:hover:bg-indigo-900/50 md:py-4 md:text-lg md:px-10 transition duration-150 ease-in-out">
+                                        {{ __('app.hero.cta_contact') }}
                                         {{ __('app.hero.cta_contact') }}
                                     </a>
                                 </div>
@@ -58,8 +64,10 @@
             <div class="text-center">
                 <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl">
                     {{ __('app.features.title') }}
+                    {{ __('app.features.title') }}
                 </h2>
                 <p class="mt-4 max-w-2xl text-xl text-gray-500 dark:text-gray-400 mx-auto">
+                    {{ __('app.features.subtitle') }}
                     {{ __('app.features.subtitle') }}
                 </p>
             </div>
@@ -76,7 +84,9 @@
                                     </svg>
                                 </div>
                                 <h3 class="mt-8 text-lg font-medium text-gray-900 dark:text-white tracking-tight">{{ __('app.features.multi_tenant.title') }}</h3>
+                                <h3 class="mt-8 text-lg font-medium text-gray-900 dark:text-white tracking-tight">{{ __('app.features.multi_tenant.title') }}</h3>
                                 <p class="mt-5 text-base text-gray-500 dark:text-gray-400">
+                                    {{ __('app.features.multi_tenant.description') }}
                                     {{ __('app.features.multi_tenant.description') }}
                                 </p>
                             </div>
@@ -93,7 +103,9 @@
                                     </svg>
                                 </div>
                                 <h3 class="mt-8 text-lg font-medium text-gray-900 dark:text-white tracking-tight">{{ __('app.features.realtime.title') }}</h3>
+                                <h3 class="mt-8 text-lg font-medium text-gray-900 dark:text-white tracking-tight">{{ __('app.features.realtime.title') }}</h3>
                                 <p class="mt-5 text-base text-gray-500 dark:text-gray-400">
+                                    {{ __('app.features.realtime.description') }}
                                     {{ __('app.features.realtime.description') }}
                                 </p>
                             </div>
@@ -110,7 +122,9 @@
                                     </svg>
                                 </div>
                                 <h3 class="mt-8 text-lg font-medium text-gray-900 dark:text-white tracking-tight">{{ __('app.features.analytics.title') }}</h3>
+                                <h3 class="mt-8 text-lg font-medium text-gray-900 dark:text-white tracking-tight">{{ __('app.features.analytics.title') }}</h3>
                                 <p class="mt-5 text-base text-gray-500 dark:text-gray-400">
+                                    {{ __('app.features.analytics.description') }}
                                     {{ __('app.features.analytics.description') }}
                                 </p>
                             </div>
@@ -128,8 +142,10 @@
                 <div class="text-center">
                     <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl">
                         {{ __('app.contact.title') }}
+                        {{ __('app.contact.title') }}
                     </h2>
                     <p class="mt-4 text-lg text-gray-500 dark:text-gray-400">
+                        {{ __('app.contact.subtitle') }}
                         {{ __('app.contact.subtitle') }}
                     </p>
                 </div>
@@ -144,6 +160,7 @@
                         </div>
                         <div class="ml-3">
                             <p class="message-text text-sm font-medium text-green-800 dark:text-green-200">
+                                {{ session('success') ?? __('app.contact.success_message') }}
                                 {{ session('success') ?? __('app.contact.success_message') }}
                             </p>
                         </div>
@@ -161,6 +178,7 @@
                         <div class="ml-3">
                             <p class="message-text text-sm font-medium text-red-800 dark:text-red-200">
                                 {{ __('app.contact.error_message') }}
+                                {{ __('app.contact.error_message') }}
                             </p>
                         </div>
                     </div>
@@ -173,6 +191,7 @@
                     <div>
                         <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             {{ __('app.contact.form.name_label') }} <span class="text-red-500">*</span>
+                            {{ __('app.contact.form.name_label') }} <span class="text-red-500">*</span>
                         </label>
                         <div class="mt-1">
                             <input type="text"
@@ -181,6 +200,7 @@
                                    value="{{ old('name') }}"
                                    required
                                    class="appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm @error('name') border-red-300 dark:border-red-600 @enderror"
+                                   placeholder="{{ __('app.contact.form.name_placeholder') }}">
                                    placeholder="{{ __('app.contact.form.name_placeholder') }}">
                         </div>
                         @error('name')
@@ -191,6 +211,7 @@
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             {{ __('app.contact.form.email_label') }} <span class="text-red-500">*</span>
+                            {{ __('app.contact.form.email_label') }} <span class="text-red-500">*</span>
                         </label>
                         <div class="mt-1">
                             <input type="email"
@@ -199,6 +220,7 @@
                                    value="{{ old('email') }}"
                                    required
                                    class="appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm @error('email') border-red-300 dark:border-red-600 @enderror"
+                                   placeholder="{{ __('app.contact.form.email_placeholder') }}">
                                    placeholder="{{ __('app.contact.form.email_placeholder') }}">
                         </div>
                         @error('email')
@@ -209,6 +231,7 @@
                     <div>
                         <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             {{ __('app.contact.form.message_label') }} <span class="text-red-500">*</span>
+                            {{ __('app.contact.form.message_label') }} <span class="text-red-500">*</span>
                         </label>
                         <div class="mt-1">
                             <textarea name="message"
@@ -216,6 +239,7 @@
                                       rows="5"
                                       required
                                       class="appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm @error('message') border-red-300 dark:border-red-600 @enderror"
+                                      placeholder="{{ __('app.contact.form.message_placeholder') }}">{{ old('message') }}</textarea>
                                       placeholder="{{ __('app.contact.form.message_placeholder') }}">{{ old('message') }}</textarea>
                         </div>
                         @error('message')
@@ -227,10 +251,12 @@
                         <button type="submit"
                                 class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out">
                             {{ __('app.contact.form.submit_button') }}
+                            {{ __('app.contact.form.submit_button') }}
                         </button>
                     </div>
 
                     <p class="text-xs text-gray-500 dark:text-gray-400 text-center">
+                        {{ __('app.contact.form.privacy_notice') }}
                         {{ __('app.contact.form.privacy_notice') }}
                     </p>
                 </form>

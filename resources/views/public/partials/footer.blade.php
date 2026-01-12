@@ -41,13 +41,7 @@
                             Home
                         </a>
                     </li>
-                    @auth
-                        <li>
-                            <a href="{{ route('dashboard') }}" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 text-sm transition">
-                                Dashboard
-                            </a>
-                        </li>
-                    @else
+                    @guest
                         <li>
                             <a href="{{ route('login') }}" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 text-sm transition">
                                 Login
@@ -58,7 +52,7 @@
                                 Sign Up
                             </a>
                         </li>
-                    @endauth
+                    @endguest
                 </ul>
             </div>
 

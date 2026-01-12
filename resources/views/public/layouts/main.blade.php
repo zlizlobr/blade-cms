@@ -19,7 +19,7 @@
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
             <!-- Header -->
-            @include('partials.header')
+            @include('public::partials.header')
 
             <!-- Page Content -->
             <main>
@@ -27,7 +27,7 @@
             </main>
 
             <!-- Footer -->
-            @include('partials.footer')
+            @include('public::partials.footer')
         </div>
 
         @stack('scripts')

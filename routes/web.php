@@ -17,9 +17,8 @@ Route::post('/locale/{locale}', [LocaleController::class, 'change'])->name('loca
 // Language switcher
 Route::post('/locale/{locale}', [LocaleController::class, 'change'])->name('locale.change');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Language switcher
+Route::post('/locale/{locale}', [LocaleController::class, 'change'])->name('locale.change');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -41,5 +40,10 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::get('/submissions', [SubmissionController::class, 'index'])->name('submissions.index');
     Route::get('/submissions/{submission}', [SubmissionController::class, 'show'])->name('submissions.show');
 });
+
+// Backward compatibility: Dashboard route alias for Laravel Breeze auth controllers
+Route::get('/dashboard', function () {
+    return redirect()->route('admin.dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';

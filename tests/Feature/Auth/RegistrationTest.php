@@ -26,6 +26,7 @@ class RegistrationTest extends TestCase
         ]);
 
         $this->assertAuthenticated();
-        $response->assertRedirect(route('dashboard', absolute: false));
+        // New users are subscribers and get redirected to home
+        $response->assertRedirect(route('home', absolute: false));
     }
 }
