@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+// Suppress PHP 8.5 PDO deprecation warnings from vendor files
+error_reporting(E_ALL & ~E_DEPRECATED);
+
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
