@@ -19,6 +19,22 @@ class EventServiceProvider extends ServiceProvider
         FormSubmitted::class => [
             SendFormNotification::class,
         ],
+
+        // Module events
+        \App\Domain\Module\Events\ModuleInstalled::class => [
+            \App\Domain\Module\Listeners\LogModuleOperation::class,
+        ],
+        \App\Domain\Module\Events\ModuleActivated::class => [
+            \App\Domain\Module\Listeners\RegisterModuleProviders::class,
+            \App\Domain\Module\Listeners\LogModuleOperation::class,
+        ],
+        \App\Domain\Module\Events\ModuleDeactivated::class => [
+            \App\Domain\Module\Listeners\DeregisterModuleProviders::class,
+            \App\Domain\Module\Listeners\LogModuleOperation::class,
+        ],
+        \App\Domain\Module\Events\ModuleUninstalled::class => [
+            \App\Domain\Module\Listeners\LogModuleOperation::class,
+        ],
     ];
 
     /**
