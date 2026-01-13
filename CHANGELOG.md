@@ -1,3 +1,27 @@
+## [v0.6.5] – 2026-01-13
+
+- release: patch -- Actions CI workflow: unit tests (#16)
+* Add Views and Api test suites to PHPUnit configuration
+
+* Add GitHub Actions CI workflow for automated testing
+
+* Add Laravel Pint configuration with strict types enforcement
+
+* Add PHPStan with Larastan for static code analysis
+
+* Add code quality checks to CI workflow with Pint and PHPStan
+
+* Format authentication tests with strict types declaration
+
+* Add authorization and policy tests with strict types
+
+* Add Blade view rendering tests for admin, auth, public and components
+
+* Add unit tests for core services and remove example tests
+
+* Downgrade to Laravel 11 for PHP 8.2-8.3 compatibility
+- chore: update changelog for v0.6.4
+
 ## [v0.6.4] – 2026-01-12
 
 - release: patch -- Refactor views to use  (#15)
