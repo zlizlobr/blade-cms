@@ -71,6 +71,10 @@ class ModuleRepository implements ModuleRepositoryInterface
      */
     public function findModulesWithDependencyOn(string $slug): Collection
     {
-        return Module::whereJsonContains('dependencies', $slug)->get();
+        return Module::all()->filter(function (Module $module) use ($slug) {
+            $dependencies = $module->getDependencies();
+
+            return array_key_exists($slug, $dependencies);
+        })->values();
     }
 }
