@@ -1,3 +1,97 @@
+## [v0.7.0] – 2026-01-13
+
+- release: minor -- Core Module System (#17)
+* Add core Domain layer for Module system with dependencies and versioning
+
+* Add Module events, listeners and Infrastructure layer with hot-reload
+
+* Add unit tests for VersionChecker and DependencyResolver services
+
+* Add comprehensive feature tests for module lifecycle management
+
+* Admin UI
+
+* Add module documentation and example Blog module with lifecycle tests
+
+* Add REST API endpoints for module management with authentication and tests
+
+* Fix Suppress PHP 8.5 PDO deprecation warnings from vendor files
+- chore: update changelog for v0.6.5
+
+## [v0.6.5] – 2026-01-13
+
+- release: patch -- Actions CI workflow: unit tests (#16)
+* Add Views and Api test suites to PHPUnit configuration
+
+* Add GitHub Actions CI workflow for automated testing
+
+* Add Laravel Pint configuration with strict types enforcement
+
+* Add PHPStan with Larastan for static code analysis
+
+* Add code quality checks to CI workflow with Pint and PHPStan
+
+* Format authentication tests with strict types declaration
+
+* Add authorization and policy tests with strict types
+
+* Add Blade view rendering tests for admin, auth, public and components
+
+* Add unit tests for core services and remove example tests
+
+* Downgrade to Laravel 11 for PHP 8.2-8.3 compatibility
+- chore: update changelog for v0.6.4
+
+## [v0.6.4] – 2026-01-12
+
+- release: patch -- Refactor views to use  (#15)
+* Add theme system directory structure for view separation
+
+* Move shared view components to default theme directory
+
+* Add ThemeViewServiceProvider to register theme namespace for view resolution
+
+* Update view references to use theme namespace for layouts and partials
+
+* Add comprehensive documentation for view system and theme architecture
+
+* Move profile views to theme namespace for consistent architecture
+
+* Convert auth views to use @extends pattern for consistency with admin views
+
+* Create specialized welcome layout and integrate welcome page into theme system
+
+* Refactor dashboard and profile views to use @extends pattern for consistency
+
+* Move navigation from layouts to partials for better semantic organization
+
+* Register admin and public view namespaces in ThemeViewServiceProvider
+
+* Move dashboard view to admin/dashboard/index and update controller to use admin namespace
+
+* Rename ThemeViewServiceProvider to ViewServiceProvider for better semantics
+
+* Update SubmissionController to use admin namespace for views
+
+* Migrate public views to dedicated public namespace and create main layout
+
+* Migrate auth views to use dedicated auth layouts folder without namespace
+
+* Fix profile view to use admin namespace and correct partial references
+
+* Clean up unused theme layouts and fix admin sidebar references
+
+* Update views README with new admin and public namespace architecture
+
+* Fix test assertions for new view namespace architecture and add dashboard route alias
+
+* Update view assertions in AdminTest to use correct namespace format (admin::) and add backward-compatible dashboard route for Laravel Breeze auth controllers
+
+* Fix all remaining test failures after view refactoring
+
+* fixed the registration flow issue
+- chore: update changelog for v0.6.3
+
 ## [v0.6.3] – 2026-01-11
 
 - release: patch -- Refactoring (#13)
