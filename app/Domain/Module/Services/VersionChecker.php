@@ -21,7 +21,7 @@ class VersionChecker implements VersionCheckerInterface
     /**
      * Check if module version is compatible with core version.
      */
-    public function isCompatibleWithCore(string $moduleCompatibility, string $coreVersion): bool
+    public function isCompatibleWithCore(?string $moduleCompatibility, string $coreVersion): bool
     {
         if (empty($moduleCompatibility)) {
             return true; // No constraint means compatible with all versions

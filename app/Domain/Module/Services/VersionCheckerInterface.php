@@ -17,7 +17,7 @@ interface VersionCheckerInterface
     /**
      * Check if module version is compatible with core version.
      */
-    public function isCompatibleWithCore(string $moduleCompatibility, string $coreVersion): bool;
+    public function isCompatibleWithCore(?string $moduleCompatibility, string $coreVersion): bool;
 
     /**
      * Parse a version string into components.
