@@ -16,6 +16,7 @@ class AdminViewTest extends TestCase
     use RefreshDatabase;
 
     private Tenant $tenant;
+
     private User $admin;
 
     protected function setUp(): void

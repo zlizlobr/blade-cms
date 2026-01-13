@@ -17,6 +17,7 @@ class FormSubmissionServiceTest extends TestCase
     use RefreshDatabase;
 
     private FormSubmissionService $service;
+
     private Tenant $tenant;
 
     protected function setUp(): void

@@ -23,7 +23,7 @@ class FormSubmissionService implements FormSubmissionServiceInterface
      */
     public static function create(): self
     {
-        return new self(new FormSubmissionRepository());
+        return new self(new FormSubmissionRepository);
     }
 
     /**

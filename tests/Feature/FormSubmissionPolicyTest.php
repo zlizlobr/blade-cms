@@ -16,7 +16,9 @@ class FormSubmissionPolicyTest extends TestCase
     use RefreshDatabase;
 
     private Tenant $tenant;
+
     private User $admin;
+
     private User $subscriber;
 
     protected function setUp(): void

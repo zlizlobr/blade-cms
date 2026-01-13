@@ -173,6 +173,11 @@ Laravel Pint enforces code style standards:
 # Fix code style automatically
 ./vendor/bin/pint
 ```
+```bash
+# Spusť s 2GB paměti (jako v CI)
+./vendor/bin/phpstan analyse --memory-limit=2G
+```
+
 
 ### PHPStan
 

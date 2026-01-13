@@ -16,7 +16,7 @@ class SubmissionQueryService implements SubmissionQueryServiceInterface
      */
     public static function create(): self
     {
-        return new self();
+        return new self;
     }
 
     /**

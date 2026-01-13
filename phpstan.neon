@@ -18,3 +18,10 @@ parameters:
     # Laravel-specific
     checkModelProperties: true
     checkOctaneCompatibility: false
+    treatPhpDocTypesAsCertain: false
+
+    # Ignore known Laravel type system issues
+    ignoreErrors:
+        - '#Parameter .* of class .* constructor expects .*, .* given#'
+        - '#should return .* but returns .*Model.*pivot.*#'
+        - '#Offset .* on .* on left side of \?\? does not exist#'

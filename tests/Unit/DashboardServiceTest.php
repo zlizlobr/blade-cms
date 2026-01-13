@@ -16,6 +16,7 @@ class DashboardServiceTest extends TestCase
     use RefreshDatabase;
 
     private DashboardService $service;
+
     private Tenant $tenant;
 
     protected function setUp(): void

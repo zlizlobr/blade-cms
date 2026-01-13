@@ -44,8 +44,6 @@ class Tenant extends Model
 
     /**
      * Get the list of translatable attributes.
-     *
-     * @return array
      */
     protected function getTranslatableAttributes(): array
     {
