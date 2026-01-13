@@ -10,17 +10,11 @@ trait HasTranslations
 {
     /**
      * Get the list of translatable attributes.
-     *
-     * @return array
      */
     abstract protected function getTranslatableAttributes(): array;
 
     /**
      * Get a translation for a specific field and locale.
-     *
-     * @param  string  $field
-     * @param  string|null  $locale
-     * @return string|null
      */
     public function getTranslation(string $field, ?string $locale = null): ?string
     {
@@ -48,9 +42,6 @@ trait HasTranslations
     /**
      * Set a translation for a specific field and locale.
      *
-     * @param  string  $field
-     * @param  string  $locale
-     * @param  string  $value
      * @return $this
      */
     public function setTranslation(string $field, string $locale, string $value): self
@@ -65,9 +56,6 @@ trait HasTranslations
 
     /**
      * Get all translations for a specific field.
-     *
-     * @param  string  $field
-     * @return array
      */
     public function getTranslations(string $field): array
     {
@@ -84,10 +72,6 @@ trait HasTranslations
 
     /**
      * Check if a translation exists for a specific field and locale.
-     *
-     * @param  string  $field
-     * @param  string  $locale
-     * @return bool
      */
     public function hasTranslation(string $field, string $locale): bool
     {

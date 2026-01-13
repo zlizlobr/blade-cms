@@ -1,0 +1,27 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+    level: 5
+    paths:
+        - app
+        - config
+        - routes
+
+    # Exclude problematic paths
+    excludePaths:
+        - bootstrap
+        - storage
+        - vendor
+        - database/migrations
+
+    # Laravel-specific
+    checkModelProperties: true
+    checkOctaneCompatibility: false
+    treatPhpDocTypesAsCertain: false
+
+    # Ignore known Laravel type system issues
+    ignoreErrors:
+        - '#Parameter .* of class .* constructor expects .*, .* given#'
+        - '#should return .* but returns .*Model.*pivot.*#'
+        - '#Offset .* on .* on left side of \?\? does not exist#'

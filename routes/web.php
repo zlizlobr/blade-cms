@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\ProfileController;
 use App\Presentation\Http\Controllers\Admin\DashboardController;
