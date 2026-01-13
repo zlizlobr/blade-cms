@@ -1,3 +1,9 @@
+## [v0.7.1] – 2026-01-13
+
+- release: patch -- Add docs for modules (#18)
+* Add docs for modules
+- chore: update changelog for v0.7.0
+
 ## [v0.7.0] – 2026-01-13
 
 - release: minor -- Core Module System (#17)
