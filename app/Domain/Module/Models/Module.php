@@ -7,7 +7,9 @@ namespace App\Domain\Module\Models;
 use App\Domain\Module\Enums\ModuleStatus;
 use App\Domain\Tenant\Models\Tenant;
 use App\Support\Traits\BelongsToTenant;
+use Database\Factories\ModuleFactory;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -128,5 +130,13 @@ class Module extends Model
     public function scopeInstalled(Builder $query): Builder
     {
         return $query->where('status', ModuleStatus::INSTALLED);
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     */
+    protected static function newFactory(): Factory
+    {
+        return ModuleFactory::new();
     }
 }
