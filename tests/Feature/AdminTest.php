@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature;
 
 use App\Domain\FormSubmission\Models\FormSubmission;
@@ -14,7 +16,9 @@ class AdminTest extends TestCase
     use RefreshDatabase;
 
     private Tenant $tenant;
+
     private User $admin;
+
     private User $subscriber;
 
     protected function setUp(): void
