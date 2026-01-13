@@ -8,4 +8,5 @@ return [
     App\Infrastructure\Providers\EventServiceProvider::class,
     App\Infrastructure\Providers\RepositoryServiceProvider::class,
     App\Infrastructure\Providers\ViewServiceProvider::class,
+    App\Infrastructure\Providers\ModuleServiceProvider::class,
 ];

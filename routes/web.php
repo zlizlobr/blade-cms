@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\ProfileController;
 use App\Presentation\Http\Controllers\Admin\DashboardController;
+use App\Presentation\Http\Controllers\Admin\ModuleController;
 use App\Presentation\Http\Controllers\Admin\SubmissionController;
 use App\Presentation\Http\Controllers\Web\FormSubmissionController;
 use App\Presentation\Http\Controllers\Web\HomeController;
@@ -41,6 +42,12 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     // Submissions management
     Route::get('/submissions', [SubmissionController::class, 'index'])->name('submissions.index');
     Route::get('/submissions/{submission}', [SubmissionController::class, 'show'])->name('submissions.show');
+
+    // Modules management
+    Route::get('/modules', [ModuleController::class, 'index'])->name('modules.index');
+    Route::get('/modules/{slug}', [ModuleController::class, 'show'])->name('modules.show');
+    Route::post('/modules/{slug}/activate', [ModuleController::class, 'activate'])->name('modules.activate');
+    Route::post('/modules/{slug}/deactivate', [ModuleController::class, 'deactivate'])->name('modules.deactivate');
 });
 
 // Backward compatibility: Dashboard route alias for Laravel Breeze auth controllers

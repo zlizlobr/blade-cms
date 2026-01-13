@@ -476,3 +476,24 @@ php artisan test --stop-on-failure
 **Last Updated**: January 2026
 **Test Coverage**: 100 tests, 233 assertions
 **Maintained by**: Development Team with Claude Sonnet 4.5
+
+### TO DO
+Struktura a pojmenování testů
+Momentálně v repositáři zřejmě není jasné oddělení typů testů (např. Unit vs Feature vs Views vs API). Laravel umožňuje testy rozdělit standardně:
+tests/
+├── Feature/
+├── Unit/
+├── Views/
+├── Api/
+├── Dusk/          // optional
+Každá skupina testů by měla mít svou doménu:
+Test typ	Co ověřuje
+Unit	Nejmenší části logiky (metody, služby)
+Feature	HTTP endpointy controllers
+Views	Blade rendering a komponenty
+Api	API odpovědi, JSON ověřování
+
+Chybí jasné oddělení testových vrstev
+Laravel standard doporučuje rozdělení (Unit, Feature) a případně Views/Api pokud projekt rostl.
+✓ Méně dobré pojmenování
+Senioři preferují test názvy, které popisují účel a podmínky, nikoli generické „example tests“.

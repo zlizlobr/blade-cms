@@ -6,6 +6,8 @@ namespace App\Infrastructure\Providers;
 
 use App\Domain\FormSubmission\Models\FormSubmission;
 use App\Domain\FormSubmission\Policies\FormSubmissionPolicy;
+use App\Domain\Module\Models\Module;
+use App\Domain\Module\Policies\ModulePolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -17,6 +19,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         FormSubmission::class => FormSubmissionPolicy::class,
+        Module::class => ModulePolicy::class,
     ];
 
     /**
