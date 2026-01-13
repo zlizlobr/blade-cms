@@ -36,6 +36,11 @@ return Application::configure(basePath: dirname(__DIR__))
             users: '/',
         );
 
+        $middleware->redirectTo(
+            guests: '/login',
+            users: '/',
+        );
+
         $middleware->web(append: [
             \App\Http\Middleware\SetLocale::class,
             \App\Presentation\Http\Middleware\SetTenantContext::class,
