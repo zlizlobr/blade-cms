@@ -1,3 +1,23 @@
+## [v0.7.0] – 2026-01-13
+
+- release: minor -- Core Module System (#17)
+* Add core Domain layer for Module system with dependencies and versioning
+
+* Add Module events, listeners and Infrastructure layer with hot-reload
+
+* Add unit tests for VersionChecker and DependencyResolver services
+
+* Add comprehensive feature tests for module lifecycle management
+
+* Admin UI
+
+* Add module documentation and example Blog module with lifecycle tests
+
+* Add REST API endpoints for module management with authentication and tests
+
+* Fix Suppress PHP 8.5 PDO deprecation warnings from vendor files
+- chore: update changelog for v0.6.5
+
 ## [v0.6.5] – 2026-01-13
 
 - release: patch -- Actions CI workflow: unit tests (#16)
