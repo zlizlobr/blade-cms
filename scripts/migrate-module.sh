@@ -36,7 +36,8 @@ fi
 MODULE_NAME=$1
 MODULE_PATH="app/Modules/${MODULE_NAME}"
 TARGET_DIR="../blade-modules"
-MODULE_REPO="${TARGET_DIR}/blade-module-${MODULE_NAME,,}"
+MODULE_NAME_LOWER=$(echo "${MODULE_NAME}" | tr '[:upper:]' '[:lower:]')
+MODULE_REPO="${TARGET_DIR}/blade-module-${MODULE_NAME_LOWER}"
 
 # Check if module exists
 if [ ! -d "$MODULE_PATH" ]; then
