@@ -4,8 +4,42 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "50e18e1dbb4e34ce129775c556b08f92",
+    "content-hash": "b0d78685564ec2ed348cf3193ea052b1",
     "packages": [
+        {
+            "name": "bladecms/module-blog",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "../blade-modules/blade-module-blog",
+                "reference": "a92e6888d11fd4f1615da6e461b3d13b35cc8359"
+            },
+            "require": {
+                "laravel/framework": "^11.0",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "App\\Modules\\Blog\\Providers\\ModuleServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "App\\Modules\\Blog\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "A simple blog module with posts and categories",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
         {
             "name": "brick/math",
             "version": "0.14.1",
@@ -8520,7 +8554,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": {
+        "bladecms/module-blog": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

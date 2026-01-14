@@ -8,8 +8,18 @@
     "require": {
         "php": "^8.2",
         "laravel/framework": "^11.0",
-        "laravel/tinker": "^2.10.1"
+        "laravel/tinker": "^2.10.1",
+        "bladecms/module-blog": "@dev"
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../blade-modules/*",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
     "require-dev": {
         "fakerphp/faker": "^1.23",
         "larastan/larastan": "^3.8",
