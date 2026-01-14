@@ -116,9 +116,8 @@ rm -rf src-temp
 cd - > /dev/null
 
 # Step 5: Create composer.json
-print_info "Step 5/8: Creating composer.json..."
+print_info "Step 5/10: Creating composer.json..."
 MODULE_SLUG=$(cat "${MODULE_PATH}/module.json" | grep -o '"slug"[^,]*' | cut -d'"' -f4)
-MODULE_VERSION=$(cat "${MODULE_PATH}/module.json" | grep -o '"version"[^,]*' | cut -d'"' -f4)
 MODULE_DESCRIPTION=$(cat "${MODULE_PATH}/module.json" | grep -o '"description"[^}]*' | cut -d'"' -f4)
 
 cat > "${MODULE_REPO}/composer.json" <<EOF
@@ -127,14 +126,25 @@ cat > "${MODULE_REPO}/composer.json" <<EOF
     "description": "${MODULE_DESCRIPTION}",
     "type": "library",
     "license": "MIT",
-    "version": "${MODULE_VERSION}",
+    "version": "0.0.1",
     "require": {
         "php": "^8.2",
         "laravel/framework": "^11.0"
     },
+    "require-dev": {
+        "orchestra/testbench": "^9.0",
+        "phpunit/phpunit": "^11.0",
+        "phpstan/phpstan": "^2.0",
+        "laravel/pint": "^1.0"
+    },
     "autoload": {
         "psr-4": {
             "App\\\\Modules\\\\${MODULE_NAME}\\\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\\\": "tests/"
         }
     },
     "extra": {
@@ -150,7 +160,7 @@ cat > "${MODULE_REPO}/composer.json" <<EOF
 EOF
 
 # Step 6: Create README
-print_info "Step 6/8: Creating README.md..."
+print_info "Step 6/10: Creating README.md..."
 cat > "${MODULE_REPO}/README.md" <<EOF
 # ${MODULE_NAME} Module
 
@@ -211,21 +221,69 @@ Or via Admin UI: \`/admin/modules\`
 MIT
 EOF
 
-# Step 7: Initial commit
-print_info "Step 7/8: Creating initial commit..."
+# Step 7: Setup CI/CD and testing
+print_info "Step 7/10: Setting up CI/CD workflows..."
+mkdir -p "${MODULE_REPO}/.github/workflows"
+
+if [ -f ".github/module-templates/workflows/ci.yml" ]; then
+    cp .github/module-templates/workflows/ci.yml "${MODULE_REPO}/.github/workflows/"
+fi
+
+if [ -f ".github/module-templates/workflows/release.yml" ]; then
+    cp .github/module-templates/workflows/release.yml "${MODULE_REPO}/.github/workflows/"
+fi
+
+# Step 8: Setup testing files
+print_info "Step 8/10: Setting up testing infrastructure..."
+
+if [ -f ".github/module-templates/phpunit.xml" ]; then
+    cp .github/module-templates/phpunit.xml "${MODULE_REPO}/"
+fi
+
+if [ -f ".github/module-templates/phpstan.neon" ]; then
+    cp .github/module-templates/phpstan.neon "${MODULE_REPO}/"
+fi
+
+if [ -f ".github/module-templates/CHANGELOG.md" ]; then
+    cp .github/module-templates/CHANGELOG.md "${MODULE_REPO}/"
+fi
+
+mkdir -p "${MODULE_REPO}/tests/Unit"
+mkdir -p "${MODULE_REPO}/tests/Feature"
+
+if [ -f ".github/module-templates/TestCase.php.stub" ]; then
+    cp .github/module-templates/TestCase.php.stub "${MODULE_REPO}/tests/TestCase.php"
+    # Replace {ModuleName} placeholder
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        sed -i '' "s/{ModuleName}/${MODULE_NAME}/g" "${MODULE_REPO}/tests/TestCase.php"
+    else
+        sed -i "s/{ModuleName}/${MODULE_NAME}/g" "${MODULE_REPO}/tests/TestCase.php"
+    fi
+fi
+
+if [ -f ".github/module-templates/ExampleTest.php.stub" ]; then
+    cp .github/module-templates/ExampleTest.php.stub "${MODULE_REPO}/tests/Feature/ExampleTest.php"
+fi
+
+# Step 9: Initial commit
+print_info "Step 9/10: Creating initial commit..."
 cd "${MODULE_REPO}"
+
+# Always start with v0.0.1 for new standalone modules
+INITIAL_VERSION="v0.0.1"
+
 git add .
-git commit -m "Initial commit: ${MODULE_NAME} module v${MODULE_VERSION}
+git commit -m "Initial commit: ${MODULE_NAME} module ${INITIAL_VERSION}
 
 Migrated from monorepo to standalone Composer package.
 
 Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>"
 
-git tag -a "v${MODULE_VERSION}" -m "Release version ${MODULE_VERSION}"
+git tag -a "${INITIAL_VERSION}" -m "Initial release ${INITIAL_VERSION}"
 cd - > /dev/null
 
-# Step 8: Update CMS composer.json
-print_info "Step 8/8: Updating CMS composer.json..."
+# Step 10: Update CMS composer.json
+print_info "Step 10/10: Updating CMS composer.json..."
 print_warning "You need to manually add this to your CMS composer.json require section:"
 print_info "\"bladecms/module-${MODULE_SLUG}\": \"@dev\""
 
