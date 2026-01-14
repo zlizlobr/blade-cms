@@ -113,6 +113,24 @@ fi
 
 rm -rf src-temp
 
+# Step 4b: Fix paths in ServiceProvider for new Composer package structure
+# Old paths: __DIR__ . '/../Config/' -> New paths: __DIR__ . '/../../config/'
+if [ -f "src/Providers/ModuleServiceProvider.php" ]; then
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        # macOS
+        sed -i '' "s|__DIR__ \. '/../Config/|__DIR__ . '/../../config/|g" src/Providers/ModuleServiceProvider.php
+        sed -i '' "s|__DIR__ \. '/../Routes/|__DIR__ . '/../../routes/|g" src/Providers/ModuleServiceProvider.php
+        sed -i '' "s|__DIR__ \. '/../Views'|__DIR__ . '/../../resources/views'|g" src/Providers/ModuleServiceProvider.php
+        sed -i '' "s|__DIR__ \. '/../Migrations'|__DIR__ . '/../../database/migrations'|g" src/Providers/ModuleServiceProvider.php
+    else
+        # Linux
+        sed -i "s|__DIR__ \. '/../Config/|__DIR__ . '/../../config/|g" src/Providers/ModuleServiceProvider.php
+        sed -i "s|__DIR__ \. '/../Routes/|__DIR__ . '/../../routes/|g" src/Providers/ModuleServiceProvider.php
+        sed -i "s|__DIR__ \. '/../Views'|__DIR__ . '/../../resources/views'|g" src/Providers/ModuleServiceProvider.php
+        sed -i "s|__DIR__ \. '/../Migrations'|__DIR__ . '/../../database/migrations'|g" src/Providers/ModuleServiceProvider.php
+    fi
+fi
+
 cd - > /dev/null
 
 # Step 5: Create composer.json
