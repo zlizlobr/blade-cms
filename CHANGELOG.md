@@ -1,3 +1,13 @@
+## [v0.8.0] – 2026-01-14
+
+- release: minor -- Add CI/CD workflows and testing infrastructure for standalone modules (#19)
+* Composer Path Repositoriesfor modules
+
+* Configure Composer path repositories for modular architecture
+
+* Add CI/CD templates and testing infrastructure for modules
+- chore: update changelog for v0.7.1
+
 ## [v0.7.1] – 2026-01-13
 
 - release: patch -- Add docs for modules (#18)
