@@ -40,6 +40,7 @@ class ViewServiceProvider extends ServiceProvider
         ], function ($view): void {
             $sidebar = $this->app->make(SidebarRegistryInterface::class);
             $view->with('sidebarItems', $sidebar->all());
+            $view->with('sidebarGroups', $sidebar->grouped());
         });
     }
 }

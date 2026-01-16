@@ -19,4 +19,16 @@ interface SidebarRegistryInterface
      * @return array<int, array<string, mixed>>
      */
     public function all(): array;
+
+    /**
+     * Get sidebar items grouped by 'group' key.
+     *
+     * @return array<string, array<int, array<string, mixed>>>
+     */
+    public function grouped(): array;
+
+    /**
+     * Clear internal cache (if any).
+     */
+    public function clearCache(): void;
 }
