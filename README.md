@@ -7,6 +7,7 @@ A modern **multi-tenant SaaS application** built with Laravel 11, featuring form
 - **Multi-Tenant Architecture** - Single database with automatic tenant scoping
 - **Form Submission System** - Contact forms with event-driven notifications
 - **Admin Panel** - Dashboard with statistics, submission management
+- **Extensible Admin Sidebar** - Registry-based sidebar with groups, permissions, and caching
 - **Domain-Driven Design** - Clean architecture with separated concerns
 - **Strict Type Safety** - PHP 8.1+ strict types across entire codebase
 - **Dependency Injection** - Constructor injection with static factory methods
@@ -315,6 +316,7 @@ php artisan view:cache
 - [Claude Code Rules](.claude/claude.md) - Development guidelines and coding standards
 - [Architecture Overview](docs/ARCHITECTURE.md) - System architecture details
 - [Internationalization](docs/INTERNATIONALIZATION.md) - i18n implementation guide
+- [Admin Sidebar Guide](docs/ADMIN_SIDEBAR_GUIDE.md) - Extensible sidebar registry documentation
 
 ### Phase Documentation
 
@@ -489,6 +491,7 @@ This project has undergone a comprehensive refactoring to implement modern PHP p
 ✅ **Phase 1: Strict Typing** - All PHP files use `declare(strict_types=1);` with full type hints
 ✅ **Phase 2: Dependency Injection** - Constructor injection with static factory methods
 ✅ **Phase 3: Service Layer** - Interface-based design with clean separation of concerns
+✅ **Phase 4: Admin Sidebar Registry** - Extensible sidebar with groups, permissions, caching
 
 See [TASK.md](TASK.md) for detailed refactoring documentation and workflow.
 
