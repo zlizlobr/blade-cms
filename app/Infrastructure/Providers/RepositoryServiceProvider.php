@@ -12,6 +12,8 @@ use App\Domain\FormSubmission\Services\FormSubmissionService;
 use App\Domain\FormSubmission\Services\FormSubmissionServiceInterface;
 use App\Domain\FormSubmission\Services\SubmissionQueryService;
 use App\Domain\FormSubmission\Services\SubmissionQueryServiceInterface;
+use App\Admin\Sidebar\SidebarRegistry;
+use App\Admin\Sidebar\SidebarRegistryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -41,6 +43,12 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             DashboardServiceInterface::class,
             DashboardService::class
+        );
+
+        // Admin Sidebar Registry (singleton - jedna instance pro celou aplikaci)
+        $this->app->singleton(
+            SidebarRegistryInterface::class,
+            SidebarRegistry::class
         );
     }
 

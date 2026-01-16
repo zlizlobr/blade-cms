@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b0d78685564ec2ed348cf3193ea052b1",
+    "content-hash": "226cd73cbfdef0d99c194966c399e5a7",
     "packages": [
         {
             "name": "bladecms/module-blog",
@@ -12,7 +12,7 @@
             "dist": {
                 "type": "path",
                 "url": "../blade-modules/blade-module-blog",
-                "reference": "a92e6888d11fd4f1615da6e461b3d13b35cc8359"
+                "reference": "f3e139166967830107bcfbf9b6afad7a563e6578"
             },
             "require": {
                 "laravel/framework": "^11.0",
@@ -35,6 +35,51 @@
                 "MIT"
             ],
             "description": "A simple blog module with posts and categories",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "bladecms/module-booking",
+            "version": "0.0.1",
+            "dist": {
+                "type": "path",
+                "url": "../blade-modules/blade-module-booking",
+                "reference": "f2a1ae319db3627edac13df4fe9f9dd8691aae63"
+            },
+            "require": {
+                "laravel/framework": "^11.0",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "orchestra/testbench": "^9.0",
+                "phpstan/phpstan": "^2.0",
+                "phpunit/phpunit": "^11.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "App\\Modules\\Booking\\Providers\\ModuleServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "App\\Modules\\Booking\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Tests\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Booking and reservation management module for Blade CMS",
             "transport-options": {
                 "symlink": true,
                 "relative": true
@@ -8555,7 +8600,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "bladecms/module-blog": 20
+        "bladecms/module-blog": 20,
+        "bladecms/module-booking": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

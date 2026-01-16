@@ -9,4 +9,5 @@ return [
     App\Infrastructure\Providers\RepositoryServiceProvider::class,
     App\Infrastructure\Providers\ViewServiceProvider::class,
     App\Infrastructure\Providers\ModuleServiceProvider::class,
+    App\Infrastructure\Providers\AdminSidebarServiceProvider::class,
 ];
