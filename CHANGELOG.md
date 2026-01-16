@@ -1,3 +1,13 @@
+## [v0.9.0] – 2026-01-16
+
+- release: minor -- Add extensible admin sidebar with registry pattern (#20)
+* Add extensible admin sidebar with registry pattern
+
+* Add sidebar groups, active state, caching and unit tests
+
+* Update README with new feature and documentation link
+- chore: update changelog for v0.8.0
+
 ## [v0.8.0] – 2026-01-14
 
 - release: minor -- Add CI/CD workflows and testing infrastructure for standalone modules (#19)
