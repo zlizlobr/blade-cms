@@ -20,6 +20,31 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin' => \App\Presentation\Http\Middleware\EnsureUserIsAdmin::class,
         ]);
+        
+        $middleware->redirectTo(
+            guests: '/login',
+            users: '/',
+        );
+
+        $middleware->redirectTo(
+            guests: '/login',
+            users: '/',
+        );
+
+        $middleware->redirectTo(
+            guests: '/login',
+            users: '/',
+        );
+
+        $middleware->redirectTo(
+            guests: '/login',
+            users: '/',
+        );
+
+        $middleware->redirectTo(
+            guests: '/login',
+            users: '/',
+        );
 
         $middleware->redirectTo(
             guests: '/login',
